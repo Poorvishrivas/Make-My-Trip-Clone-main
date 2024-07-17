@@ -136,13 +136,10 @@ export const LoginForm = () => {
     e.preventDefault();
 
     axios
-      .post(
-        "https://make-my-trip-clone-main-backend.vercel.app/api/auth/Login",
-        {
-          email: value.email,
-          password: value.password,
-        }
-      )
+      .post("https://make-my-trip-clone-backend.vercel.app/api/auth/Login", {
+        email: value.email,
+        password: value.password,
+      })
       .then((res) => {
         alert("Login Success");
         localStorage.setItem("token", res.data.token);

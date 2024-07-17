@@ -57,7 +57,7 @@ export const HotelSearch = () => {
     setLocation(city);
     try {
       const response = await fetch(
-        `https://make-my-trip-clone-main-backend.vercel.app//api/searchHotel?city=${city}`
+        `https://make-my-trip-clone-main-backend.vercel.app/api/searchHotel?city=${city}`
       );
       if (response.ok) {
         const result = await response.json();
