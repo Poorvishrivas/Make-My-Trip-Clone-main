@@ -74,9 +74,9 @@ export default function UserForm() {
   }, [isAdmin]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('clicked')
+    console.log("clicked");
     axios
-      .post("https://make-my-trip-clone-backend.vercel.app/api/auth/Register", newUser)
+      .post("http://localhost:5000/api/auth/Register", newUser)
       .then((res) => {
         alert("Signup Success");
         localStorage.setItem("token", res.data.token);
@@ -84,7 +84,7 @@ export default function UserForm() {
         //navigate('/')
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         alert(err.response.data.msg);
       });
   };

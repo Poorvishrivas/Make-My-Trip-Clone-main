@@ -18,21 +18,32 @@ export const Fromto = () => {
   } = useContext(Statecontext);
 
   const [text, setText] = useState([]);
+
   useEffect(() => {
     setFrom("");
     setDepartureDate("");
     setReturnDate("");
     setTravellerClass("");
-  }, []);
-  useEffect(() => {
-    let promise = async () => {
-      const url = `${apiBaseUrl}getallcountry/countries/cities`;
-      const data = await fetch(url);
+  }, [setFrom, setDepartureDate, setReturnDate, setTravellerClass]);
 
-      const ans = await data.json();
-      setText(ans);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${apiBaseUrl}getallcountry/countries/cities`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const ans = await response.json();
+        setText(ans);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
     };
-    promise();
+
+    fetchData();
   }, [apiBaseUrl]);
 
   const handleFromChange = (e) => {
