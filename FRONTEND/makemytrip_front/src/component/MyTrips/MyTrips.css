@@ -1,0 +1,38 @@
+/* frontend/src/components/MyTrips.css */
+
+.container-background {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk0ehZYkdMjD51SHgEKOSIbII3u7PpEUujmA&usqp=CAU");
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.empty-state img {
+  width: 100px;
+  height: 100px;
+}
+
+.empty-state h5 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state img {
+  width: 100px;
+  height: 100px;
+}
+
+.empty-state h5 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}

@@ -1,0 +1,60 @@
+.booking-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .booking-form,
+  .price-breakup,
+  .coupon-codes,
+  .guest-details {
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    margin-top: 0;
+  }
+  
+  .hotel-info,
+  .check-in-out,
+  .room-info,
+  .upgrade-stay,
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .check-in-out div,
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+
+  input{
+    width: 60%;
+  }
+
+  .buttonsum {
+    width: 170px;
+    height: 45px;
+    border-radius: 25px;
+    background: linear-gradient(
+      to right,
+      #8f92fa 0%,
+      #6165f0 50%,
+      #6c70eb 50%,
+      #3339e9 100%
+    );
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 80px 0px 0px 220px;
+  }
+
+  .bottomcard{
+margin-top : 18px;
+  }

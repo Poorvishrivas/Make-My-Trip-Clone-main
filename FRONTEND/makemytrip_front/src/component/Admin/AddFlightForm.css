@@ -1,0 +1,9 @@
+.input-border {
+    border: 1px solid black !important;
+    background-color: white !important;
+  }
+
+  .row{
+    display: inline;
+  }
+  

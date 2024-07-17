@@ -1,0 +1,44 @@
+.table-responsive {
+    position: relative;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  
+  .table-responsive thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .thead-fixed th {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .tbody-scroll tr {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Custom Scrollbar Styling */
+  .table-responsive::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.5);
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 100, 0.7);
+  }
+  
+  .table-responsive::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-track:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+  
