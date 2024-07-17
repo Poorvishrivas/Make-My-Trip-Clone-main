@@ -17,7 +17,7 @@ const start = async () => {
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:3000", // Adjust to your React app's URL
+    origin: "https://make-my-trip-clone-main-frontend.vercel.app/", // Adjust to your React app's URL
     credentials: true, // Allow cookies if necessary
   })
 );
