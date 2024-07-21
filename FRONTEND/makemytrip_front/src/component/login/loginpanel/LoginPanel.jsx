@@ -1,11 +1,12 @@
+
 import React from "react";
-import { useState } from "react";
+import { useState} from "react";
 import { LoginForm } from "./LoginForm";
 import { ConfirmOtp } from "./ConfirmOtp";
 import Auth from "../../../auth";
-import styled from "styled-components";
+import styled from 'styled-components'
 const Style = styled.div`
-  .loginMain {
+.loginMain {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,13 +48,16 @@ const Style = styled.div`
   .close > span {
     cursor: pointer;
   }
+  
 `;
 export const LoginPanel = ({ handleClick, handleUser }) => {
+
   const [otpSend, setOtpSend] = useState(false);
   const [findUser, setFindUser] = useState({});
   const [isUserExist, setIsUserExist] = useState(); //initial existence of user
 
-  const checkIsUserExist = (mob) => {
+  const checkIsUserExist=(mob)=>{
+
     //console.log(mob)
     //fetch user from database using mobile number
     // let user = {
@@ -65,61 +69,67 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
     // setIsUserExist(true)
 
     //if found user then  call handleuser(gotuser)
-
+    
+    
     //set user false
 
-    setIsUserExist(false);
+    setIsUserExist(false)
     //
-  };
 
-  const [state, setState] = useState({
-    phone: "",
-    hash: "",
-    otp: "",
+  }
+
+  const [state,setState] = useState({
+    phone:"",
+    hash:"",
+    otp:""
   });
 
-  const { phone, hash, otp } = state;
-  const value = { phone, hash, otp };
+  const {phone,hash,otp} = state;
+  const value = {phone,hash,otp}
 
   const handleOtpSend = () => {
     setOtpSend(true);
   };
 
-  // handling with user login inputs
-  const handleChange = (input) => (e) => {
-    setState({ ...state, [input]: e.target.value });
-  };
+// handling with user login inputs
+    const handleChange = (input)=>(e)=>{
 
-  //handling has status
-  const hashHandleChange = (hash) => {
-    setState({ ...state, hash: hash });
-  };
-  const handleNewUser = (newuser) => {
-    handleUser(newuser);
-  };
+      setState({...state,[input]:e.target.value});
+    }
+  
+    //handling has status
+    const hashHandleChange = (hash)=>{
+      setState({...state, hash:hash});
+    }
+    const handleNewUser = (newuser)=>{
+    
+      handleUser(newuser)
+    }
 
   return (
-    <Style>
+  <Style>
       <div className="loginMain">
-        <div className="login-wrap">
-          {Auth.isAuthenticated() && isUserExist ? (
-            handleNewUser(findUser)
-          ) : otpSend ? (
-            <ConfirmOtp
-              handleNewUser={checkIsUserExist}
-              handleChange={handleChange} // handling with user login inputs
-              value={value}
-            />
-          ) : (
-            <LoginForm
-              handleOtpStatus={handleOtpSend}
-              handleChange={handleChange} // handling with user login inputs
-              hashHandleChange={hashHandleChange} //handling has status
-              value={value}
-            />
-          )}
-        </div>
+      <div className="login-wrap">
+        {
+          (Auth.isAuthenticated()&& isUserExist ) ?handleNewUser(findUser):
+        
+       otpSend ? (
+          <ConfirmOtp
+                handleNewUser = {checkIsUserExist}
+                handleChange={handleChange}           // handling with user login inputs          
+                value = {value}
+          />
+        ) :(
+          <LoginForm 
+          handleOtpStatus={handleOtpSend} 
+          handleChange={handleChange}           // handling with user login inputs
+          hashHandleChange={hashHandleChange}   //handling has status
+          value = {value}
+          
+          />
+        )}
       </div>
-    </Style>
+    </div>
+  </Style>
   );
 };

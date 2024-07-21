@@ -1,36 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { Form, Button, Container } from "react-bootstrap";
-import NavBar from "../NavBar";
-import backgroundImage from "../../Assets/flight.jpg";
-import Statecontext from "../Context/Statecontext";
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { Form, Button, Container } from 'react-bootstrap';
+import NavBar from '../NavBar';
+import backgroundImage from '../../Assets/flight.jpg';
+import Statecontext from '../Context/Statecontext';
 import { useNavigate, useParams } from "react-router-dom";
-import "./FlightsList.css";
-import { getToken } from "../login/loginpanel/LoginForm";
+import './FlightsList.css';
+import { getToken } from '../login/loginpanel/LoginForm';
 
 const UpdateFlightForm = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // Get flight ID from URL parameters
   const { apiBaseUrl } = useContext(Statecontext);
   const [flight, setFlight] = useState({
-    flightNumber: "",
-    departure: "",
-    arrival: "",
-    departureTime: "",
-    arrivalTime: "",
-    price: "",
-    oneWayPrice: "",
-    oneWayPriceEconomy: "",
-    oneWayPricePremium: "",
-    stops: "",
-    stopLocations: "",
+    flightNumber: '',
+    departure: '',
+    arrival: '',
+    departureTime: '',
+    arrivalTime: '',
+    price: '',
+    oneWayPrice: '',
+    oneWayPriceEconomy: '',
+    oneWayPricePremium: '',
+    stops: '',
+    stopLocations: '',
     refundableFares: false,
-    cityName: "",
-    airportCode: "",
-    airportName: "",
-    class: "",
-    slot: "",
-    isDelete: false,
+    cityName: '',
+    airportCode: '',
+    airportName: '',
+    class: '',
+    slot:'',
+    isDelete: false
   });
 
   useEffect(() => {
@@ -42,15 +42,15 @@ const UpdateFlightForm = () => {
       const url = `${apiBaseUrl}admin/flights/${id}`;
       const response = await axios.get(url, {
         headers: {
-          Authorization: "Bearer " + getToken(),
-        },
+          'Authorization': 'Bearer ' + getToken()
+        }
       });
       setFlight(response.data);
     } catch (error) {
-      console.error("Error fetching flight details:", error);
+      console.error('Error fetching flight details:', error);
       if (error.response.status === 403) {
-        alert("Log In as Admin");
-        navigate("/");
+        alert('Log In as Admin');
+        navigate('/');
       }
     }
   };
@@ -59,7 +59,7 @@ const UpdateFlightForm = () => {
     const { name, value, type, checked } = e.target;
     setFlight({
       ...flight,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
@@ -69,30 +69,24 @@ const UpdateFlightForm = () => {
       const url = `${apiBaseUrl}admin/flights/${id}`;
       await axios.put(url, flight, {
         headers: {
-          Authorization: "Bearer " + getToken(),
-        },
+          'Authorization': 'Bearer ' + getToken()
+        }
       });
-      navigate("/admin/flight");
+      navigate('/admin/flight');
     } catch (error) {
-      console.error("Error updating flight:", error);
+      console.error('Error updating flight:', error);
       if (error.response.status === 403) {
-        alert("Log In as Admin");
-        navigate("/");
+        alert('Log In as Admin');
+        navigate('/');
       }
     }
   };
   const formatDateForInput = (dateString) => {
-    return dateString ? dateString.slice(0, 16) : ""; // Adjust as per your date format needs
+    return dateString ? dateString.slice(0, 16) : ''; // Adjust as per your date format needs
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),url(${backgroundImage})`,
-        backgroundSize: "cover",
-        minHeight: "100vh",
-      }}
-    >
+    <div style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),url(${backgroundImage})`, backgroundSize: 'cover', minHeight: '100vh' }}>
       <NavBar />
       <Container className="mt-5">
         <h2 className="text-center mb-4">Update Flight</h2>
@@ -175,10 +169,7 @@ const UpdateFlightForm = () => {
                 />
               </Form.Group>
 
-              <Form.Group
-                controlId="formOneWayPriceEconomy"
-                className="col-md-6"
-              >
+              <Form.Group controlId="formOneWayPriceEconomy" className="col-md-6">
                 <Form.Label>One-Way Price Economy</Form.Label>
                 <Form.Control
                   type="number"
@@ -188,10 +179,7 @@ const UpdateFlightForm = () => {
                 />
               </Form.Group>
 
-              <Form.Group
-                controlId="formOneWayPricePremium"
-                className="col-md-6"
-              >
+              <Form.Group controlId="formOneWayPricePremium" className="col-md-6">
                 <Form.Label>One-Way Price Premium</Form.Label>
                 <Form.Control
                   type="number"
@@ -265,16 +253,17 @@ const UpdateFlightForm = () => {
                 />
               </Form.Group>
               <Form.Group controlId="formAirportName" class="col-md-4">
-                <Form.Label>Seats</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Available Seat"
-                  name="slot"
-                  value={flight.slot}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
+
+            <Form.Label>Seats</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Available Seat"
+              name="slot"
+              value={flight.slot}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
 
               <Form.Group controlId="formClass" className="col-md-6">
                 <Form.Label>Class</Form.Label>
@@ -295,6 +284,6 @@ const UpdateFlightForm = () => {
       </Container>
     </div>
   );
-};
+}
 
 export default UpdateFlightForm;

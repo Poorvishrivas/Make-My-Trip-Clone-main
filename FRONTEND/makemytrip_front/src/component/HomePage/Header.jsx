@@ -175,8 +175,11 @@ export const Header = () => {
             </span>
             <p>Activities</p>
           </div>
+         
         </div>
+       
       </div>
+     
     </Icondivcss>
   );
 };

@@ -28,7 +28,7 @@ import HotelBookingDetails from "./component/MyTrips/HotelBookingDetails";
 import Admin from "./component/Admin/Admin";
 
 function App() {
-  let apiBaseUrl = "https://make-my-trip-clone-main-backend.vercel.app/api/";
+  let apiBaseUrl = "http://localhost:5000/api/";
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
   const [departureDate, setDepartureDate] = useState("");
@@ -80,9 +80,9 @@ function App() {
               <Route path="/SignUp" element={<UserForm />} />
               <Route path="/FlightBooking/:Id" element={<Booking />} />
               <Route path="/HotelBooking/:Id" element={<Bookings />} />
-              <Route path="/booking" element={<BookingPage />} />
+              {/* <Route path="/booking" element={<BookingPage />} /> */}
               <Route path="/MyTrips" element={<MyTrips />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/booking" element={<Admin />} />
               <Route
                 path="/FlightBookingDetails"
                 element={<FlightBookingDetails />}
