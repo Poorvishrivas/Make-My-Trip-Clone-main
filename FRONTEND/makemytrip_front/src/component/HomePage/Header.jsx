@@ -176,9 +176,6 @@ export const Header = () => {
             <p>Activities</p>
           </div>
         </div>
-        <div className="login">
-          <Login handleClick={handlePopup} />
-        </div>
       </div>
     </Icondivcss>
   );

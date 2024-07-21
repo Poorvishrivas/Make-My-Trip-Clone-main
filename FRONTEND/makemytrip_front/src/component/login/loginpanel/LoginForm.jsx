@@ -127,6 +127,8 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState({ email: "", password: "" });
   const [isAdmin, setIsAdmin] = useState(false);
+  const pathname = window.location.pathname;
+  console.log(pathname);
 
   const handleChange = (name) => (event) => {
     setValue({ ...value, [name]: event.target.value });
@@ -144,11 +146,14 @@ export const LoginForm = () => {
         }
       )
       .then((res) => {
-        alert("Login Success");
+        //   alert("Login Success");
         localStorage.setItem("token", res.data.token);
         // window.location.reload();
+        console.log(pathname);
         console.log(res, "Response");
         getAdminRole();
+        const popup = document.getElementById("popup");
+        popup.classList.remove("active");
       })
       .catch((err) => {
         alert(err.response.data.msg);
@@ -158,7 +163,13 @@ export const LoginForm = () => {
   const getAdminRole = () => {
     const userRole = localStorage.getItem("role");
     if (userRole == "admin") {
-      navigate("/admin");
+      if (!pathname.includes("Booking")) {
+        navigate("/Admin/FlightList");
+      } else {
+        navigate(pathname);
+      }
+    } else {
+      navigate(pathname);
     }
   };
   const handleSignupClick = (isAdmin) => {

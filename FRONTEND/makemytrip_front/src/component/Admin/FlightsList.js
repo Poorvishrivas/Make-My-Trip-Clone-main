@@ -86,6 +86,7 @@ const FlightsList = () => {
               <tr className="table-success">
                 <th>#</th>
                 <th>Flight Number</th>
+                <th>Flight Seats</th>
                 <th>Departure</th>
                 <th>Arrival</th>
                 <th>Departure Time</th>
@@ -113,6 +114,7 @@ const FlightsList = () => {
                 >
                   <td>{index + 1}</td>
                   <td>{flight.flightNumber}</td>
+                  <td>{flight.slot}</td>
                   <td>{flight.departure}</td>
                   <td>{flight.arrival}</td>
                   <td>{new Date(flight.departureTime).toLocaleString()}</td>

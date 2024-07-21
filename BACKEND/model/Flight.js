@@ -18,6 +18,7 @@ const FlightSchema = new mongoose.Schema({
   airportCode: { type: String, required: true },
   airportName: { type: String, required: true },
   class: { type: String, required: true },
+  slot: { type: Number, require: true, default: 99 },
   isDelete: { type: Boolean, required: true, default: false }, // New field
 });
 

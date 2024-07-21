@@ -89,7 +89,7 @@ export const Main = () => {
             <div>
               <h4 className="white-text">
                 {isAdmin ? (
-                  <Link to="/admin">Manage Trips</Link>
+                  <Link to="/booking">Manage Trips</Link>
                 ) : (
                   <Link to="/MyTrips">My Trips</Link>
                 )}

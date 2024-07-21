@@ -24,6 +24,7 @@ exports.searchFlights = async (req, res) => {
   try {
     // Find outbound flights
     const outboundFlights = await Flight.find(query);
+    console.log(outboundFlights);
     flights = flights.concat(outboundFlights); // Add outbound flights to the results
 
     // If return date is provided, search for return flights
@@ -84,6 +85,8 @@ exports.searchFlightsByPrice = async (req, res) => {
 
   try {
     const outboundFlights = await Flight.find(query);
+    console.log("hello");
+    console.log(outboundFlights);
     flights = flights.concat(outboundFlights);
 
     if (returnDate) {
