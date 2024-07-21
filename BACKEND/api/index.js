@@ -23,7 +23,7 @@ app.use(
     origin: [
       "https://make-my-trip-clone-main-frontend.vercel.app", // Replace with your React app's domain
 
-      "http://localhost:3000", // Local development domain
+      // Local development domain
     ],
     credentials: true, // Allow cookies for authenticated requests (if applicable)
   })

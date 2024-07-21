@@ -17,7 +17,7 @@ app.use(express.json({ extended: false }));
 //app.use(cors());
 app.use(
   cors({
-    origin: "https://make-my-trip-clone-main-frontend.vercel.app", // Replace with your React app's domain
+    origin: "*", // Replace with your React app's domain
     credentials: true, // Allow cookies for authenticated requests (if applicable)
   })
 );
