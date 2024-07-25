@@ -14,15 +14,13 @@ const start = async () => {
 start();
 app.use(express.json({ extended: false }));
 
-//app.use(cors());
 app.use(
   cors({
-    origin: "https://make-my-trip-clone-main-frontend.vercel.app", // Replace with your React app's domain
-    credentials: true, // Allow cookies for authenticated requests (if applicable)
+    origin: "https://make-my-trip-clone-main-frontend.vercel.app",
+    credentials: true,
   })
 );
 
-// Define Routes
 app.get("/", (req, res) => {
   res.send("server running");
 });
@@ -34,8 +32,5 @@ app.use("/api/searchFlight", require("../routes/searchFlightRoutes"));
 app.use("/api/searchHotel", require("../routes/searchHotelRoutes"));
 app.use("/api", require("../routes/bookingRoutes"));
 app.use("/api", hotelBookingRoutes);
-// const PORT = process.env.PORT || 5000;
-
-// app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 module.exports = start;
