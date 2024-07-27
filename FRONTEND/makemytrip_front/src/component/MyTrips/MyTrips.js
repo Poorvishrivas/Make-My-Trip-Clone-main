@@ -1,18 +1,9 @@
 // frontend/src/components/MyTrips.js
-import React, { useContext } from "react";
+import React from "react";
 import "./MyTrips.css";
-import { Nav, Tab, Container, Row, Col, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import { Nav, Tab, Container, Row, Col } from "react-bootstrap";
 
 const MyTrips = () => {
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleAddFlightClick = () => {
-    navigate("/add-flight");
-  };
-
   return (
     <Container className="container-background mt-5">
       <Tab.Container defaultActiveKey="FlightBookings">
@@ -41,24 +32,9 @@ const MyTrips = () => {
           <Col md={8} className="text-center">
             <Tab.Content>
               <Tab.Pane eventKey="FlightBookings">
-                {user && user.role === "admin" && (
-                  <Button
-                    variant="primary"
-                    onClick={handleAddFlightClick}
-                    className="mb-3"
-                  >
-                    Add Flight Ticket
-                  </Button>
-                )}
                 <div className="empty-state">
-                  {/* <img
-                    src="https://via.placeholder.com/150"
-                    alt="Empty state"
-                    className="img-fluid my-4"
-                  /> */}
                   <h5>Looks empty, you've no Flights Bookings.</h5>
                   <p>When you book a trip, you will see your itinerary here.</p>
-                  {/* <Button variant="primary">PLAN A TRIP</Button> */}
                 </div>
               </Tab.Pane>
               <Tab.Pane eventKey="HotelBookings">
