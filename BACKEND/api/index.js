@@ -12,11 +12,16 @@ const start = async () => {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 };
 start();
+
 app.use(express.json({ extended: false }));
 
+// Update CORS settings to allow requests from specific origins
 app.use(
   cors({
-    origin: "https://make-my-trip-clone-main-frontend.vercel.app",
+    origin: [
+      "https://make-my-trip-clone-main-frontend.vercel.app",
+      "https://make-my-trip-clone-main-frontend-c9udwe7oa.vercel.app", // Add additional origins as needed
+    ],
     credentials: true,
   })
 );
