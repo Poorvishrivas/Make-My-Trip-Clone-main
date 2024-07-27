@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Style = styled.div`
-  display: grid;
-  grid-template-columns: 30% 70%;
+  display: flex;
+  flex-direction: column;
   gap: 30px;
-  background-color: #f0f0f0;
+  background: linear-gradient(
+    to bottom,
+    #f0f4f8,
+    #e6e9f0
+  ); /* Gradient background */
   padding: 20px;
 
   .filters {
@@ -15,12 +19,14 @@ const Style = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    height: fit-content;
-    position: relative;
+    max-width: 300px; /* Fixed width for consistency */
   }
 
   .allData {
     margin: 0;
+    max-width: calc(100% - 320px); /* Adjust based on filters width */
+    margin-left: 20px;
+
     h1 {
       color: #333;
       font-size: 24px;
@@ -52,27 +58,13 @@ const Style = styled.div`
           }
         }
 
-        .two {
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-          line-height: 1.2;
-
-          h5 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-          }
-          p {
-            font-size: 14px;
-            font-weight: 600;
-          }
-        }
-
+        .two,
         .three {
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
+          line-height: 1.2;
 
           p {
             font-size: 14px;
@@ -159,8 +151,6 @@ export const Bottom = ({
   handleRefund,
   handleAirlines,
 }) => {
-  console.log("Data received:", data); // Log the data to the console
-
   const [value, setValue] = useState("");
   const [refundable, setRefundable] = useState(true);
   const [checkedItems, setCheckedItems] = useState([]);

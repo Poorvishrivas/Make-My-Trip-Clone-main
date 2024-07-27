@@ -1,3 +1,4 @@
+//Please search hotel for mumbai
 import { Header } from "./Header";
 import { HotelSearchBox } from "./HotelSearchBox";
 import { BottomHotels } from "./BottomHotels";

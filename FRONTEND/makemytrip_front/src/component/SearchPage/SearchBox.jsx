@@ -3,76 +3,59 @@ import styled from "styled-components";
 import Statecontext from "../Context/Statecontext";
 
 const Style = styled.div`
-  height: 300px;
-  background: linear-gradient(to top, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  .jelo {
-    width: 100%;
-    background-color: #0f3460;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    .topdiv {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 15px;
-      .first,
-      .second {
-        background: #1f406d;
-        border-radius: 10px;
-        padding: 10px;
-        color: #f5f5f5;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        flex: 1;
-        min-width: 150px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        p {
-          font-size: 16px;
-          font-weight: 600;
-          margin-bottom: 5px;
-        }
-        select,
-        input {
-          width: 100%;
-          border: none;
-          border-radius: 5px;
-          padding: 8px;
-          font-size: 16px;
-          color: #fff;
-          background-color: #16213e;
-        }
-        input {
-          background-color: #1a1a2e;
-        }
-        option {
-          background-color: #1f406d;
-        }
-      }
-      button {
-        width: 100%;
-        height: 50px;
-        border-radius: 25px;
-        background: linear-gradient(to right, #9d4edd 0%, #6a2c77 100%);
-        border: none;
-        color: white;
-        font-weight: 700;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        &:hover {
-          background: linear-gradient(to right, #7b2cbf 0%, #4a006e 100%);
-        }
-      }
-    }
+  height: auto;
+  background: linear-gradient(to bottom, #f0f4f8, #e6e9f0);
+  padding: 20px;
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
   }
-  .hello {
-    position: fixed;
-    z-index: 100;
-    top: 0;
+  .search-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .search-box > div {
+    flex: 1 1 30%;
+    min-width: 150px;
+  }
+  .search-box select,
+  .search-box input {
     width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    background-color: #ffffff;
+  }
+  .search-box select {
+    background-color: #ffffff;
+  }
+  .search-box option {
+    background-color: #ffffff;
+  }
+  .search-box input {
+    background-color: #ffffff;
+  }
+  .search-box button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .search-box button:hover {
+    background-color: #0056b3;
   }
 `;
 
@@ -96,11 +79,11 @@ export const SearchBox = ({ handle }) => {
     to: to,
     TravellerClass: travellerClass,
     trip: "",
-    DepartDate: "", // Set default value here if needed, e.g., "2024-08-15"
+    DepartDate: departureDate,
     ReturnDate: returnDate,
   });
 
-  const [text, setText] = useState([]);
+  const [cities, setCities] = useState([]);
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -118,7 +101,7 @@ export const SearchBox = ({ handle }) => {
         );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
-        setText(data);
+        setCities(data);
       } catch (error) {
         console.error("Failed to fetch cities:", error);
       }
@@ -127,88 +110,67 @@ export const SearchBox = ({ handle }) => {
     fetchCities();
   }, [apiBaseUrl]);
 
-  const handleButton = () => {
+  const handleButtonClick = () => {
     handle(select);
   };
 
-  const [nav, setNav] = useState(false);
-  const handleChange = () => {
-    setNav(window.scrollY >= 10);
-  };
-  window.addEventListener("scroll", handleChange);
-
   return (
     <Style>
-      <div className={nav ? "hello jelo" : "jelo"}>
-        <div className="topdiv">
-          <div className="first">
+      <div className="search-container">
+        <div className="search-box">
+          <div>
             <p>Trip Type</p>
-            <select
-              name="trip"
-              id="trip"
-              onChange={handleSelect}
-              value={select.trip}
-            >
+            <select name="trip" onChange={handleSelect} value={select.trip}>
               <option value="">Select</option>
               <option value="oneway">Oneway</option>
               <option value="twoway">Twoway</option>
             </select>
           </div>
-          <div className="second">
+          <div>
             <p>From</p>
-            <select
-              onChange={handleSelect}
-              name="from"
-              id="from"
-              value={select.from}
-            >
+            <select name="from" onChange={handleSelect} value={select.from}>
               <option value="">Select</option>
-              {text.map((e) => (
-                <option value={e.cityName} key={e.cityName}>
-                  {e.cityName}
+              {cities.map((city) => (
+                <option key={city.cityName} value={city.cityName}>
+                  {city.cityName}
                 </option>
               ))}
             </select>
           </div>
-          <div className="second">
+          <div>
             <p>To</p>
-            <select onChange={handleSelect} name="to" id="to" value={select.to}>
+            <select name="to" onChange={handleSelect} value={select.to}>
               <option value="">Select</option>
-              {text.map((e) => (
-                <option value={e.cityName} key={e.cityName}>
-                  {e.cityName}
+              {cities.map((city) => (
+                <option key={city.cityName} value={city.cityName}>
+                  {city.cityName}
                 </option>
               ))}
             </select>
           </div>
-          <div className="second">
+          <div>
             <p>Depart</p>
             <input
               name="DepartDate"
               type="date"
-              id="DepartDate"
-              className="date"
               value={select.DepartDate}
               onChange={handleSelect}
             />
           </div>
-          <div className="second">
+          <div>
             <p>Return</p>
             <input
               name="ReturnDate"
               type="date"
-              id="returndate"
-              className="date"
-              onChange={handleSelect}
               value={select.ReturnDate}
+              onChange={handleSelect}
             />
           </div>
-          <div className="second">
+          <div>
             <p>Traveller and Class</p>
             <select
-              onChange={handleSelect}
               name="TravellerClass"
-              id="TravellerClass"
+              onChange={handleSelect}
               value={select.TravellerClass}
             >
               <option value="">Select</option>
@@ -216,9 +178,11 @@ export const SearchBox = ({ handle }) => {
               <option value="Premium">Premium</option>
             </select>
           </div>
-          <button onClick={handleButton}>SEARCH</button>
+          <button onClick={handleButtonClick}>SEARCH</button>
         </div>
       </div>
     </Style>
   );
 };
+
+export default SearchBox;
