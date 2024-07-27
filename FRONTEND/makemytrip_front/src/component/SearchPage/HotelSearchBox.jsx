@@ -4,25 +4,39 @@ import Statecontext from "../Context/Statecontext";
 
 const Style = styled.div`
   height: auto;
-  background: linear-gradient(to bottom, #f0f4f8, #e6e9f0);
+  background: linear-gradient(
+      to bottom,
+      rgba(240, 244, 248, 0.8),
+      rgba(230, 233, 240, 0.8)
+    ),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQimr82v6dxQ1KJ9J2YYg4VC9stqIa1m0UY_A&usqp=CAU")
+      /* Ensure this URL is correct */ no-repeat center center;
+  background-size: cover;
   padding: 20px;
+
   .search-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     max-width: 800px;
     margin: auto;
+    background: rgba(255, 255, 255, 0.8); /* Optional: for better readability */
+    padding: 20px;
+    border-radius: 10px;
   }
+
   .search-box {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
   }
+
   .search-box > div {
     flex: 1 1 30%;
     min-width: 150px;
   }
+
   .search-box select,
   .search-box input {
     width: 100%;
@@ -32,6 +46,7 @@ const Style = styled.div`
     font-size: 16px;
     color: #333;
   }
+
   .search-box button {
     width: 100%;
     padding: 10px;
@@ -44,6 +59,7 @@ const Style = styled.div`
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
+
   .search-box button:hover {
     background-color: #0056b3;
   }
