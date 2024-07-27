@@ -20,12 +20,24 @@ export const Fromto = () => {
   const [text, setText] = useState([]);
 
   useEffect(() => {
-    // Reset the form values when the component mounts
-    setFrom("");
-    setDepartureDate("");
-    setReturnDate("");
-    setTravellerClass("");
-  }, [setFrom, setDepartureDate, setReturnDate, setTravellerClass]);
+    // Set default values if not already set
+    if (!from) setFrom("Delhi"); // Default value for "from"
+    if (!to) setTo("Chennai"); // Default value for "to"
+    if (!departureDate) setDepartureDate("");
+    if (!returnDate) setReturnDate("");
+    if (!travellerClass) setTravellerClass("");
+  }, [
+    from,
+    to,
+    departureDate,
+    returnDate,
+    travellerClass,
+    setFrom,
+    setTo,
+    setDepartureDate,
+    setReturnDate,
+    setTravellerClass,
+  ]);
 
   useEffect(() => {
     // Fetch the cities data
