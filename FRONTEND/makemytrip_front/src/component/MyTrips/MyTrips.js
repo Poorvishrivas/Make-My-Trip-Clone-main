@@ -1,9 +1,18 @@
 // frontend/src/components/MyTrips.js
-import React from "react";
+import React, { useContext } from "react";
 import "./MyTrips.css";
-import { Nav, Tab, Container, Row, Col } from "react-bootstrap";
+import { Nav, Tab, Container, Row, Col, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const MyTrips = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleAddFlightClick = () => {
+    navigate("/add-flight");
+  };
+
   return (
     <Container className="container-background mt-5">
       <Tab.Container defaultActiveKey="FlightBookings">
@@ -32,6 +41,15 @@ const MyTrips = () => {
           <Col md={8} className="text-center">
             <Tab.Content>
               <Tab.Pane eventKey="FlightBookings">
+                {user && user.role === "admin" && (
+                  <Button
+                    variant="primary"
+                    onClick={handleAddFlightClick}
+                    className="mb-3"
+                  >
+                    Add Flight Ticket
+                  </Button>
+                )}
                 <div className="empty-state">
                   {/* <img
                     src="https://via.placeholder.com/150"
