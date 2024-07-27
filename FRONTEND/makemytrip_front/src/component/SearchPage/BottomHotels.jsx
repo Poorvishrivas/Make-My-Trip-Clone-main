@@ -2,226 +2,228 @@ import styled from "styled-components";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 const Style = styled.div`
   display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 30px;
-  background-color: #e4e4e4;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+
   .filters {
-    background-color: white;
-    margin-left: 100px;
-    height: 700px;
-    box-shadow: 0px 0px 4px #c9c8c8;
-    position: relative;
-    top: -140px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    height: auto;
   }
-  .allData {
-    margin-right: 100px;
-    position: relative;
-    top: -100px;
-    h1 {
-      color: white;
-      position: relative;
-      top: -60px;
-      font-size: 26px;
-    }
-    .maping {
-      background-color: white;
-      position: relative;
-      padding: 1%;
-      top: -60px;
-      margin-bottom: 10px;
-      box-shadow: 0px 0px 4px #c9c8c8;
-      //start
-      .div1 {
-        display: flex;
-        justify-content: space-around;
-        height: 40px;
-        padding: 5px;
-        .one {
-          display: flex;
-          align-items: center;
-          img {
-            width: 25px;
-          }
-          gap: 6px;
-          p {
-            font-size: 14px;
-            font-weight: 700;
-          }
-        }
-        a{
-          text-decoration: none;
-          color: white;
-        }
-        .two {
-          display: flex;
-          text-align: center;
-          flex-direction: column;
-          line-height: 10px;
-          /* align-items: center; */
-          h5 {
-            padding-top: 12px;
-            margin: 0;
-            font-size: 22px;
-            font-weight: 700;
-            text-align: left;
-          }
-          p {
-            font-size: 12px;
-            font-weight: 600;
-          }
-        }
-        .three {
-          line-height: 0px;
-          align-items: center;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          p {
-            font-size: 12px;
-            font-weight: 600;
-          }
-          span {
-            font-size: 11px;
-            font-weight: 700;
-          }
-          div {
-            width: 50px;
-            height: 3px;
-            position: relative;
-            top: -5px;
-            border-radius: 6px;
-            background-color: red;
-            margin: auto;
-          }
-        }
-        h4 {
-          align-items: center;
-          font-size: 22px;
-          position: relative;
-          top: -20px;
-        }
-          
-        button {
-          width: 130px;
-          height: 38px;
-          border-radius: 25px;
-          background: linear-gradient(
-            to right,
-            #8f92fa 0%,
-            #6165f0 50%,
-            #6c70eb 50%,
-            #3339e9 100%
-          );
-          border: none;
-          color: white;
-          font-weight: 600;
-          font-size: 15px;
-        }
-      }
-      .div2 {
-        /* height: 60px; */
-        background-color: #fff2dc;
-        margin-top: 20px;
-        text-align: center;
-        font-size: 11px;
-        padding: 1%;
-      }
-    }
-    .div3 {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      margin: auto;
-      p:nth-child(1) {
-        font-size: 13px;
-        font-weight: 600;
-        color: green;
-      }
-      p:nth-child(2) {
-        font-size: 13px;
-        font-weight: 400;
-        color: blue;
-      }
-    }
+
+  .filters h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
   }
-  .firstFilter {
-    padding: 12px 15px;
-    text-align: left;
+
+  .filters .div {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    h3 {
-      color: #000000;
-      font-size: 17px;
-      line-height: 0px;
-      text-align: left;
-    }
-    .div {
-      padding: 0;
-      align-items: center;
-      color: #000000;
-      display: flex;
-      font-size: 14px;
-      p {
-        color: #000000;
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-        line-height: 21px;
-        font-weight: 500;
-        margin-left: 10px;
-        align-items: center;
-      }
-    }
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .filters .div input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .filters .div input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  .filters .div p {
+    margin: 0;
+    color: #555;
+  }
+
+  .filters input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .filters .range-label {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .allData {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    height: 700px;
+  }
+
+  .allData h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .maping {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .maping .div1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .maping .div1 .one h6 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .maping .div1 .two h6 {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+  }
+
+  .maping .div1 .three {
+    text-align: right;
+    color: #777;
+  }
+
+  .maping .div1 .three h6 {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .maping .div1 .three span {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .maping .div2 {
+    background-color: #e7f1ff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #555;
+  }
+
+  .maping .div3 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #777;
+  }
+
+  .maping .div3 p {
+    margin: 0;
+  }
+
+  .maping h4 {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .maping h4 button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(
+      to right,
+      #8f92fa 0%,
+      #6165f0 50%,
+      #6c70eb 50%,
+      #3339e9 100%
+    );
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .maping h4 button:hover {
+    background: linear-gradient(
+      to right,
+      #6c70eb 0%,
+      #3339e9 50%,
+      #6165f0 50%,
+      #8f92fa 100%
+    );
   }
 `;
-export const BottomHotels = ({ data, bookData,sorting ,sorthigh,handleWifi,handleHousekeeping,HandleBreakfast,handleAcHeating}) => {
+
+export const BottomHotels = ({
+  data,
+  bookData,
+  sorting,
+  sorthigh,
+  handleWifi,
+  handleHousekeeping,
+  HandleBreakfast,
+  handleAcHeating,
+}) => {
   const [value, setValue] = useState("");
   const handleSlider = (e) => {
     setValue(e.target.value);
   };
-  const handleSort = (e)=>{
-    console.log("handle sort 1st",e)
-      sorting(e.target.checked)
-  }
-  const handleHigh = (e)=>{
-    console.log("handle sort 1st high",e)
-    sorthigh(e.target.checked)
-  }
-  const handleHouse = (e)=>{
-    console.log("handle handleHouse",e)
-    handleHousekeeping(e.target.checked)
-  }
+
+  const handleSort = (e) => {
+    sorting(e.target.checked);
+  };
+
+  const handleHigh = (e) => {
+    sorthigh(e.target.checked);
+  };
+
+  const handleHouse = (e) => {
+    handleHousekeeping(e.target.checked);
+  };
+
   let x = localStorage.getItem("myKey");
   let y = JSON.parse(x);
+
   return (
     <Style>
       <div className="filters">
         <div className="firstFilter">
           <h3>Sort by price</h3>
           <div className="div">
-            <input onChange={handleSort} type="radio" name="sort"/>
+            <input onChange={handleSort} type="radio" name="sort" />
             <p>Low to High</p>
           </div>
           <div className="div">
-            <input onChange={handleHigh} type="radio" name="sort"/>
+            <input onChange={handleHigh} type="radio" name="sort" />
             <p>High to Low</p>
           </div>
         </div>
         <div className="firstFilter">
           <h3>Amenities</h3>
           <div className="div">
-            <input type="checkbox" onChange={handleWifi}/>
+            <input type="checkbox" onChange={handleWifi} />
             <p>Free Wi-Fi</p>
           </div>
           <div className="div">
-            <input type="checkbox" onChange={HandleBreakfast}/>
+            <input type="checkbox" onChange={HandleBreakfast} />
             <p>Complimentary Breakfast</p>
           </div>
           <div className="div">
-            <input type="checkbox" onChange={handleHousekeeping}/>
+            <input type="checkbox" onChange={handleHousekeeping} />
             <p>Housekeeping</p>
           </div>
           <div className="div">
@@ -230,14 +232,13 @@ export const BottomHotels = ({ data, bookData,sorting ,sorthigh,handleWifi,handl
           </div>
         </div>
         <div className="firstFilter">
-          <h3>Select Range ₹{value}</h3>
+          <h3>Select Range</h3>
+          <p className="range-label">₹{value}</p>
           <input type="range" min="1000" max="10000" onChange={handleSlider} />
         </div>
       </div>
       <div className="allData">
-        <h1>
-        Experience unparalleled luxury and comfort.
-        </h1>
+        <h1>Experience unparalleled luxury and comfort.</h1>
         {data.map((hotel) => (
           <div key={nanoid(6)} className="maping">
             <div className="div1">
@@ -255,9 +256,9 @@ export const BottomHotels = ({ data, bookData,sorting ,sorthigh,handleWifi,handl
                 <h6>{hotel.address}</h6>
               </div>
               <h4>
-              <Link to={`/HotelBooking/${hotel._id}`}>
-              <button onClick={() => bookData(hotel)}>Book</button>
-            </Link>
+                <Link to={`/HotelBooking/${hotel._id}`}>
+                  <button onClick={() => bookData(hotel)}>Book</button>
+                </Link>
               </h4>
             </div>
             <div className="div2">
