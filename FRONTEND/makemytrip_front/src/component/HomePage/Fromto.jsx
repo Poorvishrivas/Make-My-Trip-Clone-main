@@ -23,7 +23,13 @@ export const Fromto = () => {
     // Set default values if not already set
     if (!from) setFrom("Delhi"); // Default value for "from"
     if (!to) setTo("Chennai"); // Default value for "to"
-    if (!departureDate) setDepartureDate("");
+
+    // Set default departure date to current date
+    if (!departureDate) {
+      const today = new Date().toISOString().split("T")[0];
+      setDepartureDate(today);
+    }
+
     if (!returnDate) setReturnDate("");
     if (!travellerClass) setTravellerClass("");
   }, [
