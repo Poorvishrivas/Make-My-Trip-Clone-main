@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Smallbutton } from "./Smallbutton";
 import BusinessIcon from "@mui/icons-material/Business";
@@ -11,11 +11,9 @@ import { Bigslide, TripMoney } from "./Slidecss";
 import { Bottom } from "./Bottom";
 import { Header } from "./Header";
 import { SmallBottom } from "./SmallBottom";
-import { useContext, useState } from "react";
 import { FareTypes } from "./FareTypes";
 import { Login } from "../login/Login";
 import Statecontext from "../Context/Statecontext";
-import { useNavigate } from "react-router-dom";
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -24,6 +22,7 @@ export const Main = () => {
     from: "",
     to: "",
   });
+
   const {
     from,
     setFrom,
@@ -38,15 +37,22 @@ export const Main = () => {
     apiBaseUrl,
   } = useContext(Statecontext);
 
-  useState(() => {
+  useEffect(() => {
     console.log(from);
   }, [from]);
 
   const handleData = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   useEffect(() => {
+    const getAdminRole = () => {
+      const userRole = localStorage.getItem("role");
+      if (userRole === "admin") {
+        setIsAdmin(true);
+      }
+    };
     getAdminRole();
   }, []);
 
@@ -58,13 +64,7 @@ export const Main = () => {
     const popup = document.getElementById("popup");
     popup.classList.toggle("active");
   };
-  const getAdminRole = () => {
-    const userRole = localStorage.getItem("role");
-    if (userRole == "admin") {
-      // navigate("/admin");
-      setIsAdmin(true);
-    }
-  };
+
   return (
     <div>
       <Header />
@@ -73,9 +73,7 @@ export const Main = () => {
           <Link to="/">
             <img
               className="mmtlogo"
-              src={
-                "https://imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/mmtLogoWhite.png"
-              }
+              src="https://imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/mmtLogoWhite.png"
               alt="Logo"
             />
           </Link>
@@ -101,7 +99,7 @@ export const Main = () => {
             <div className="smallbuttonpic">
               <img
                 src="https://imgak.mmtcdn.com/mybiz/assets/images/landing/myBizLogo_light.png"
-                alt=""
+                alt="myBiz"
               />
             </div>
             <div>
@@ -111,21 +109,21 @@ export const Main = () => {
           </Smallbutton>
         </div>
         <Bookingcss>
-          <Icondiv className="icondiv"></Icondiv>
+          <Icondiv className="icondiv" />
           <div className="checkboxdiv">
             <div>
               <input type="checkbox" value="1" />
-              <label htmlFor="">ONEWAY</label>
+              <label>ONEWAY</label>
               <input type="checkbox" value="2" />
-              <label htmlFor="">ROUNDWAY</label>
+              <label>ROUNDWAY</label>
             </div>
             <div>INTERNATIONAL FLIGHTS | DOMESTIC FLIGHTS</div>
           </div>
           <Fromto handleChange={handleData} />
           <FareTypes />
         </Bookingcss>
-        <div className="button">
-          <button onClick={addLocal}>
+        <div className="button-wrapper">
+          <button className="button" onClick={addLocal}>
             <Link to="/search">SEARCH</Link>
           </button>
         </div>
@@ -145,45 +143,45 @@ export const Main = () => {
               <h4>MORE</h4>
             </div>
           </div>
-          <BigSlidesExample className="bigslideex"></BigSlidesExample>
+          <BigSlidesExample className="bigslideex" />
         </Bigslide>
         <TripMoney>
           <div className="maindiv">
             <div id="div2" style={{ borderColor: "#e47dad" }}>
               <img
                 src="https://www.tripmoney.com/ext/static/TravelLoan/travelLoan.png"
-                alt=""
+                alt="Personal loan"
               />
               <div>
-                <div className="spa1n"></div>
+                <div className="spa1n" />
                 <h3>Personal loan</h3>
                 <p>Get upto ₹1 lakh for booking flights, hotels & more.</p>
               </div>
-              <div className="span2"></div>
+              <div className="span2" />
             </div>
             <div id="div2" style={{ borderColor: "#dde47d" }}>
               <img
                 src="https://www.tripmoney.com/ext/static/credit-card/cc@3x.png"
-                alt=""
+                alt="Credit cards"
               />
               <div>
-                <div className="spa1n"></div>
+                <div className="spa1n" />
                 <h3>Credit cards</h3>
                 <p>Get instant approval & unmatched privileges.</p>
               </div>
-              <div className="span2"></div>
+              <div className="span2" />
             </div>
             <div id="div2" style={{ borderColor: "#7dbee4" }}>
               <img
                 src="https://www.tripmoney.com/ext/static/PL/pl.png"
-                alt=""
+                alt="Travel loan"
               />
               <div>
-                <div className="spa1n"></div>
+                <div className="spa1n" />
                 <h3>Travel loan</h3>
                 <p>Get approval for ₹30,00,000 at low interest rates.</p>
               </div>
-              <div className="span2"></div>
+              <div className="span2" />
             </div>
           </div>
         </TripMoney>

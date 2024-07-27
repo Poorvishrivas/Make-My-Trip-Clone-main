@@ -1,187 +1,191 @@
 import styled from "styled-components";
+
+// Updated Smallslide styles
 export const Slidecss = styled.div`
-  height: 100px;
-  width: 350px;
-  background-color: white;
-  margin: auto;
+  height: 120px; /* Increased height for better visibility */
+  width: 100%; /* Full width for better responsiveness */
+  max-width: 400px; /* Max width to limit size on large screens */
+  background-color: #ffffff;
+  margin: 10px auto; /* Added margin for spacing */
   border-radius: 8px;
-  box-shadow: 0px 2px 3px #cccccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  padding: 4%;
-  margin-bottom: 5px;
-  img{
-    margin-top : -10px
+  gap: 15px; /* Adjusted gap */
+  padding: 8px; /* Increased padding */
+  box-sizing: border-box; /* Include padding in width/height calculation */
+
+  img {
+    max-width: 80px; /* Fixed width for better alignment */
+    border-radius: 8px;
+    object-fit: cover; /* Ensures image covers the box */
   }
 `;
 
+// Updated Bigslide styles
 export const Bigslide = styled.div`
-  height: 350px;
-  box-shadow: 0px 0px 3px #c0bdbd;
-  width: 90%;
-  background-color: white;
+  height: auto; /* Adjust height to auto for better content fitting */
+  max-width: 90%; /* Limit width for better responsiveness */
+  background-color: #ffffff;
   border-radius: 8px;
-  margin: auto;
-  margin-top: 50px;
+  margin: 20px auto; /* Adjusted margin */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  padding: 20px; /* Increased padding */
+  box-sizing: border-box; /* Include padding in width/height calculation */
+
   .supreoffers {
     display: flex;
     flex-direction: row;
-    width: 90%;
-    justify-content: flex-start;
-    gap: 100px;
-    background-color: white;
-    margin: auto;
+    width: 100%;
+    justify-content: space-between; /* Adjusted for better alignment */
+    gap: 20px; /* Adjusted gap */
+    background-color: #ffffff;
+    margin-bottom: 20px;
+
     h1 {
-      font-size: 40px;
-      position: relative;
-      top: 0px;
-      color: #363636;
+      font-size: 32px; /* Adjusted font size */
+      color: #333333; /* Darker color for better contrast */
     }
+
     div {
       display: flex;
       flex-direction: row;
-      gap: 15px;
-      height: 50px;
-      color: #363636;
-     // border-bottom: 1px solid #4a4a4a;
+      gap: 20px; /* Adjusted gap */
+      align-items: center; /* Center aligned */
+      color: #333333;
     }
   }
+
   .parentbigslide {
-    padding: 30px;
+    margin-bottom: 20px; /* Added margin for spacing */
   }
+
   .bigslideDiv {
-    display: grid;
+    display: flex; /* Changed to flex for better layout */
     cursor: pointer;
-    grid-template-columns: 30% 70%;
-    width: 480px;
-    box-shadow: 0px 0px 5px #a8a6a6;
+    width: 100%; /* Full width for responsiveness */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
     border-radius: 8px;
-    height: 150px;
-    gap: 5px;
-    padding: 1%;
+    height: auto; /* Adjust height to auto for better content fitting */
+    gap: 15px; /* Adjusted gap */
+    padding: 10px; /* Increased padding */
+    box-sizing: border-box; /* Include padding in width/height calculation */
+    background-color: #f9f9f9; /* Light background for better readability */
+
     div {
-      padding-top: 0px;
-      margin-top: 0px;
+      padding: 0;
+      margin: 0;
     }
+
     h3 {
-      color: gray;
-      font-size: 100%;
-      position: relative;
-      top: -25px;
+      color: #666666; /* Adjusted color */
+      font-size: 16px; /* Adjusted font size */
+      margin: 0 0 5px 0; /* Adjusted margin */
     }
+
     h2 {
-      font-size: 18px;
-      position: relative;
-      top: -22px;
-      padding : 7px
+      font-size: 20px; /* Adjusted font size */
+      padding: 5px 0; /* Adjusted padding */
     }
+
     img {
       border-radius: 8px;
-      position: relative;
-      top: 3px;
-      left: 10px;
     }
+
     p {
-      font-size: 11px;
-      top: 32px;
-      color: gray;
-      position: relative;
+      font-size: 14px; /* Adjusted font size */
+      color: #666666; /* Adjusted color */
     }
+
     span {
-      color: gray;
-      font-size: 10px;
-      position: relative;
-      bottom: 5px;
-      left: 18px;
+      color: #999999; /* Adjusted color */
+      font-size: 12px; /* Adjusted font size */
     }
+
     h4 {
-      font-size: 18px;
-      top: -45px;
-      right: 20px;
-      color: #2b3cd1;
+      font-size: 20px; /* Adjusted font size */
+      color: #1a73e8; /* Adjusted color */
       text-align: right;
-      position: relative;
     }
+
     .reddiv {
-      width: 50px;
-      background-color: red;
-      height: 2px;
-      position: relative;
-      top: -55px;
+      width: 60px; /* Adjusted width */
+      background-color: #e53935; /* Adjusted color */
+      height: 3px; /* Adjusted height */
+      margin-top: 10px; /* Adjusted margin */
     }
   }
 `;
 
+// Updated TripMoney styles
 export const TripMoney = styled.div`
-  width: 88%;
-  margin: auto;
+  width: 90%; /* Full width for responsiveness */
+  max-width: 1200px; /* Max width to limit size */
+  margin: 30px auto; /* Adjusted margin */
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px; /* Increased padding */
+  box-sizing: border-box; /* Include padding in width/height calculation */
+
   .maindiv {
-    height: 130px;
-    margin-top: 100px;
-    color: #4a4a4a;
+    height: auto; /* Adjust height to auto for better content fitting */
     display: flex;
-    font-size: 14px;
+    flex-direction: column;
+    gap: 20px; /* Adjusted gap */
+    color: #333333;
+    font-size: 16px; /* Adjusted font size */
+
     #div2 {
       align-items: center;
-      background-color: #ffffff;
-      border-radius: 6px;
-      border-style: solid;
-      border-width: 2px 2px 2px 40px;
+      background-color: #f4f4f4; /* Light background for better readability */
+      border-radius: 8px; /* Adjusted border radius */
+      border: 2px solid #dddddd; /* Light border */
       display: flex;
-      font-size: 14px;
-      margin: 0px 10px 20px 0px;
-      padding: 0px 15px 0px 50px;
-      img {
-        width: 61px;
-        height: 61px;
-        padding: 5px;
-        position: relative;
-        left: -80px;
-      }
-      p {
-        color: #4a4a4a;
-        font-size: 14px;
-        line-height: 18px;
-        position: relative;
-        top: -5px;
-        left: -60px;
-      }
-      h3 {
-        font-size: 20px;
-        font-weight: 900;
-        line-height: 20px;
-        position: relative;
+      padding: 15px; /* Increased padding */
+      box-sizing: border-box; /* Include padding in width/height calculation */
 
-        left: -60px;
-        margin: 0px 0px 3px;
+      img {
+        width: 70px; /* Adjusted width */
+        height: 70px; /* Adjusted height */
+        margin-right: 15px; /* Adjusted margin */
+      }
+
+      p {
+        color: #333333; /* Darker color for better contrast */
+        font-size: 16px; /* Adjusted font size */
+        line-height: 24px; /* Increased line height */
+      }
+
+      h3 {
+        font-size: 22px; /* Adjusted font size */
+        font-weight: 700; /* Adjusted font weight */
+        margin: 0 0 5px 0; /* Adjusted margin */
       }
     }
+
+    .spa1n,
+    .span2 {
+      background-size: 200px 600px; /* Adjusted background size */
+      color: #333333; /* Adjusted color */
+      display: inline-block;
+      font-size: 16px; /* Adjusted font size */
+      line-height: 20px; /* Adjusted line height */
+    }
+
     .spa1n {
       background-image: url("https://imgak.mmtcdn.com/pwa_v3/pwa_commons_assets/desktop/landingSprite@13x.webp");
       background-position: -106px -559px;
-      position: relative;
-      left: -60px;
-      background-size: 200px 600px;
-      color: #4a4a4a;
-      width: 90px;
-      height: 20px;
-      font-size: 0px;
+      width: 100px; /* Adjusted width */
+      height: 30px; /* Adjusted height */
     }
+
     .span2 {
       background-image: url("https://imgak.mmtcdn.com/pwa_v3/pwa_commons_assets/desktop/landingSprite@13x.webp");
       background-position: -174px -86px;
-      background-size: 200px 600px;
-      width: 42px;
-      height: 10px;
-      color: #008cff;
-      display: inline-block;
-      font-size: 0px;
-      font-weight: 900;
-      position: relative;
-      left: -20px;
-      line-height: 14px;
-      margin: 0px 0px 0px 10px;
+      width: 50px; /* Adjusted width */
+      height: 20px; /* Adjusted height */
+      color: #0077ff; /* Adjusted color */
+      font-weight: 700; /* Adjusted font weight */
       text-transform: uppercase;
     }
   }

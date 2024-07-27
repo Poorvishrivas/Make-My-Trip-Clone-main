@@ -1,79 +1,79 @@
 import styled from "styled-components";
+
 export const Bottomcss = styled.div`
-  .div1 {
+  background: #f8f8f8;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .div1,
+  .div2,
+  .div3,
+  .div4 {
     display: flex;
     justify-content: space-between;
-    width: 88%;
-    margin: auto;
-    h3 {
-      font-size: 10px;
-      padding: 0px;
-    }
-    p {
-      line-height: 3px;
-      font-size: 11px;
-      cursor: pointer;
-      color: #444343;
-    }
-    p:hover {
-      color: blue;
-    }
+    flex-wrap: wrap;
   }
+
+  .div1 > div,
+  .div3 > div {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+  }
+
   .div2 {
-    width: 88%;
-    margin: auto;
-    margin-top: 70px;
+    flex-direction: column;
     h3 {
-      font-size: 10px;
-      padding: 0px;
+      margin-top: 10px;
     }
     p {
-      font-size: 11px;
-      cursor: pointer;
-      color: #464646;
-    }
-  }
-  .div3 {
-    display: flex;
-    margin-top: 70px;
-    justify-content: space-around;
-    gap: 50px;
-    padding: 5%;
-    background-color: #dfdede;
-    h3 {
-      font-size: 14px;
-      padding: 0px;
-    }
-    p {
-      font-size: 12px;
-      cursor: pointer;
-      color: #464646;
+      margin-top: 10px;
+      line-height: 1.6;
     }
   }
 
   .div4 {
-    background-color: #000000;
-    color: #4a4a4a;
-    font-size: 14px;
-    padding: 50px 0px 60px;
-    .fb{
+    text-align: center;
+    .fb {
       display: flex;
       justify-content: space-between;
-      width: 90%;
-      margin: auto;
-      .onee{
-        display: flex;
-        cursor: pointer;
-        gap: 10px;
-        color: white;
-        align-items: center;
-      }
-      .copy{
-        line-height: 5px;
-        font-size: 18px;
-        align-items: center;
-        color: white;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: space-between;
+      width: 100px;
+      margin: 0 auto;
+    }
+    .copy {
+      margin-top: 10px;
+      p {
+        margin: 5px 0;
       }
     }
+  }
+
+  h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #666;
+    margin: 5px 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 `;

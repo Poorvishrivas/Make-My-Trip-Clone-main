@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Fromtocss } from "./Fromtocss";
 import Statecontext from "../Context/Statecontext";
 
@@ -18,21 +18,34 @@ export const Fromto = () => {
   } = useContext(Statecontext);
 
   const [text, setText] = useState([]);
+
   useEffect(() => {
+    // Reset the form values when the component mounts
     setFrom("");
     setDepartureDate("");
     setReturnDate("");
     setTravellerClass("");
-  }, []);
-  useEffect(() => {
-    let promise = async () => {
-      const url = `${apiBaseUrl}getallcountry/countries/cities`;
-      const data = await fetch(url);
+  }, [setFrom, setDepartureDate, setReturnDate, setTravellerClass]);
 
-      const ans = await data.json();
-      setText(ans);
+  useEffect(() => {
+    // Fetch the cities data
+    const fetchCities = async () => {
+      try {
+        const url = `${apiBaseUrl}getallcountry/countries/cities`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setText(data);
+      } catch (error) {
+        console.error("Failed to fetch cities:", error);
+      }
     };
-    promise();
+
+    fetchCities();
   }, [apiBaseUrl]);
 
   const handleFromChange = (e) => {
