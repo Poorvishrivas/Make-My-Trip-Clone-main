@@ -3,97 +3,68 @@ import styled from "styled-components";
 import Statecontext from "../Context/Statecontext";
 
 const Style = styled.div`
-  height: 250px;
-  background: linear-gradient(
-    to top,
-    #030779 0%,
-    #03053b 50%,
-    #03043d 50%,
-    #020420 100%
-  );
+  height: 300px;
+  background: linear-gradient(to top, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   .jelo {
     width: 100%;
-    background-color: #03032c;
+    background-color: #0f3460;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     .topdiv {
-      width: 90%;
-      height: 100px;
-      padding-bottom: 10px;
-      margin: auto;
+      width: 100%;
       display: flex;
-      justify-content: space-around;
-      padding-top: 8px;
-      align-items: center;
-      .first {
-        width: 120px;
-        padding: 0;
-        margin: 0;
-        line-height: 0px;
-        text-align: center;
-        background: rgba(104, 105, 104, 0.3);
-        border-radius: 5px;
-        p {
-          font-size: 14px;
-          font-weight: 600;
-          color: #2c98f1;
-        }
-        select {
-          border: 0px;
-          -moz-appearance: none;
-          text-indent: 1px;
-          color: white;
-          font-size: 17px;
-          text-overflow: "";
-          outline: 0px;
-          width: 100%;
-          text-align: center;
-          background-color: transparent;
-          padding: 3px;
-        }
-        option {
-          background-color: #7e7e7e;
-        }
-      }
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+      .first,
       .second {
-        width: 170px;
-        background: rgba(104, 105, 104, 0.3);
-        border-radius: 5px;
+        background: #1f406d;
+        border-radius: 10px;
+        padding: 10px;
+        color: #f5f5f5;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        flex: 1;
+        min-width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         p {
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 600;
-          margin-left: 10px;
-          color: #2c98f1;
+          margin-bottom: 5px;
         }
-        select {
-          border: 0px;
-          -moz-appearance: none;
-          text-indent: 8px;
-          color: white;
-          font-size: 17px;
-          text-overflow: "";
-          outline: 0px;
+        select,
+        input {
           width: 100%;
-          background-color: #21233e;
-          padding: 3px;
+          border: none;
+          border-radius: 5px;
+          padding: 8px;
+          font-size: 16px;
+          color: #fff;
+          background-color: #16213e;
+        }
+        input {
+          background-color: #1a1a2e;
         }
         option {
-          background-color: #494949;
+          background-color: #1f406d;
         }
       }
       button {
-        width: 170px;
-        height: 45px;
+        width: 100%;
+        height: 50px;
         border-radius: 25px;
-        background: linear-gradient(
-          to right,
-          #8f92fa 0%,
-          #6165f0 50%,
-          #6c70eb 50%,
-          #3339e9 100%
-        );
+        background: linear-gradient(to right, #9d4edd 0%, #6a2c77 100%);
         border: none;
         color: white;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        &:hover {
+          background: linear-gradient(to right, #7b2cbf 0%, #4a006e 100%);
+        }
       }
     }
   }
@@ -101,24 +72,7 @@ const Style = styled.div`
     position: fixed;
     z-index: 100;
     top: 0;
-  }
-  .fromtodiv {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 87%;
-    p {
-      font-size: 14px;
-      font-weight: 600;
-      margin-left: 10px;
-      color: #2c98f1;
-    }
-  }
-  .date {
-    border: none;
-    font-size: 16px;
-    margin-left: 10px;
-    color: white;
-    background-color: transparent;
+    width: 100%;
   }
 `;
 
@@ -142,7 +96,7 @@ export const SearchBox = ({ handle }) => {
     to: to,
     TravellerClass: travellerClass,
     trip: "",
-    DepartDate: departureDate,
+    DepartDate: "", // Set default value here if needed, e.g., "2024-08-15"
     ReturnDate: returnDate,
   });
 
@@ -150,7 +104,6 @@ export const SearchBox = ({ handle }) => {
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
-    console.log(value, "Value");
     setSelect({
       ...select,
       [name]: value,
@@ -175,24 +128,18 @@ export const SearchBox = ({ handle }) => {
   }, [apiBaseUrl]);
 
   const handleButton = () => {
-    console.log("get Value Over here", select);
     handle(select);
   };
 
   const [nav, setNav] = useState(false);
   const handleChange = () => {
-    if (window.scrollY >= 10) {
-      setNav(true);
-    } else {
-      setNav(false);
-    }
+    setNav(window.scrollY >= 10);
   };
   window.addEventListener("scroll", handleChange);
-  console.log(select, "select");
 
   return (
     <Style>
-      <div className={nav === true ? "hello jelo" : "jelo"}>
+      <div className={nav ? "hello jelo" : "jelo"}>
         <div className="topdiv">
           <div className="first">
             <p>Trip Type</p>
@@ -243,13 +190,6 @@ export const SearchBox = ({ handle }) => {
               className="date"
               value={select.DepartDate}
               onChange={handleSelect}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "white",
-                fontSize: "17px",
-                padding: "3px",
-              }}
             />
           </div>
           <div className="second">
@@ -261,13 +201,6 @@ export const SearchBox = ({ handle }) => {
               className="date"
               onChange={handleSelect}
               value={select.ReturnDate}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "white",
-                fontSize: "17px",
-                padding: "3px",
-              }}
             />
           </div>
           <div className="second">

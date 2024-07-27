@@ -2,306 +2,288 @@ import styled from "styled-components";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 const Style = styled.div`
   display: grid;
   grid-template-columns: 30% 70%;
   gap: 30px;
-  background-color: #e4e4e4;
+  background-color: #f0f0f0; /* Lighter background color */
+  padding: 20px; /* Added padding for spacing */
+
   .filters {
-    background-color: white;
-    margin-left: 100px;
-    height: 700px;
-    box-shadow: 0px 0px 4px #c9c8c8;
+    background-color: #ffffff;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    padding: 20px;
+    height: fit-content; /* Adjust height based on content */
     position: relative;
-    top: -140px;
   }
+
   .allData {
-    margin-right: 100px;
-    position: relative;
-    top: -100px;
+    margin: 0;
     h1 {
-      color: white;
-      position: relative;
-      top: -60px;
-      font-size: 26px;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
+
     .maping {
-      background-color: white;
-      position: relative;
-      padding: 1%;
-      top: -60px;
-      margin-bottom: 10px;
-      box-shadow: 0px 0px 4px #c9c8c8;
-      //start
+      background-color: #ffffff;
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+      padding: 20px;
+      margin-bottom: 20px;
+
       .div1 {
         display: flex;
-        justify-content: space-around;
-        height: 40px;
-        padding: 5px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
         .one {
           display: flex;
           align-items: center;
           img {
-            width: 25px;
+            width: 30px;
           }
-          gap: 6px;
           p {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
+            margin-left: 10px;
           }
         }
-        a{
-          text-decoration: none;
-          color: white;
-        }
+
         .two {
           display: flex;
-          text-align: center;
           flex-direction: column;
-          line-height: 10px;
-          /* align-items: center; */
+          text-align: left;
+          line-height: 1.2;
+
           h5 {
-            padding-top: 12px;
             margin: 0;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            text-align: left;
           }
           p {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
           }
         }
+
         .three {
-          line-height: 0px;
-          align-items: center;
-          text-align: center;
           display: flex;
           flex-direction: column;
+          align-items: center;
+
           p {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
           }
           span {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
           }
           div {
-            width: 50px;
-            height: 3px;
-            position: relative;
-            top: -5px;
+            width: 60px;
+            height: 4px;
             border-radius: 6px;
-            background-color: red;
-            margin: auto;
+            background-color: #e74c3c; /* Changed to a softer color */
+            margin: 5px 0;
           }
         }
-        h4 {
-          align-items: center;
-          font-size: 22px;
-          position: relative;
-          top: -20px;
-        }
-        button {
-          width: 130px;
-          height: 38px;
-          border-radius: 25px;
-          background: linear-gradient(
-            to right,
-            #8f92fa 0%,
-            #6165f0 50%,
-            #6c70eb 50%,
-            #3339e9 100%
-          );
-          border: none;
-          color: white;
-          font-weight: 600;
-          font-size: 15px;
-        }
       }
-      .div2 {
-        /* height: 60px; */
-        background-color: #fff2dc;
-        margin-top: 20px;
-        text-align: center;
-        font-size: 11px;
-        padding: 1%;
-      }
-    }
-    .div3 {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      margin: auto;
-      p:nth-child(1) {
-        font-size: 13px;
+
+      button {
+        width: 140px;
+        height: 40px;
+        border-radius: 25px;
+        background: linear-gradient(to right, #8e44ad 0%, #9b59b6 100%);
+        border: none;
+        color: white;
         font-weight: 600;
-        color: green;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        &:hover {
+          background: linear-gradient(to right, #9b59b6 0%, #8e44ad 100%);
+        }
       }
-      p:nth-child(2) {
-        font-size: 13px;
-        font-weight: 400;
-        color: blue;
+
+      .div2 {
+        background-color: #fff2e6; /* Softer background color */
+        text-align: center;
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 8px; /* Rounded corners */
+      }
+
+      .div3 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
       }
     }
   }
+
   .firstFilter {
-    padding: 12px 15px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-bottom: 20px;
+
     h3 {
-      color: #000000;
-      font-size: 17px;
-      line-height: 0px;
-      text-align: left;
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
     }
+
     .div {
-      padding: 0;
-      align-items: center;
-      color: #000000;
       display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 14px;
+      color: #333;
+
       p {
-        color: #000000;
-        font-size: 14px;
-        padding: 0;
         margin: 0;
-        line-height: 21px;
-        font-weight: 500;
-        margin-left: 10px;
-        align-items: center;
+        line-height: 1.5;
       }
     }
   }
 `;
-export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAirlines}) => {
+
+export const Bottom = ({
+  data,
+  bookData,
+  sorting,
+  sorthigh,
+  handleRefund,
+  handleAirlines,
+}) => {
   const [value, setValue] = useState("");
   const [refundable, setRefundable] = useState(true);
   const [checkedItems, setCheckedItems] = useState([]);
+
   const handleSlider = (e) => {
     setValue(e.target.value);
   };
-  const handleSort = (e)=>{
-      sorting(e.target.checked)
-  }
-  const handleHigh = (e)=>{
-    sorthigh(e.target.checked)
-  }
 
+  const handleSort = (e) => {
+    sorting(e.target.checked);
+  };
+
+  const handleHigh = (e) => {
+    sorthigh(e.target.checked);
+  };
 
   const handleChangeCheckBox = (e) => {
     const { value, checked } = e.target;
-
-    if (checked) {
-     
-      setCheckedItems(prevItems => [...prevItems, value]); // Using callback for setCheckedItems
-
-    } else {
-     
-      setCheckedItems(prevItems => prevItems.filter(item => item !== value)); // Using callback for setCheckedItems
-    }
+    setCheckedItems((prevItems) =>
+      checked
+        ? [...prevItems, value]
+        : prevItems.filter((item) => item !== value)
+    );
   };
 
-  // Logging the updated state after state update
   useEffect(() => {
-    console.log("Updated Checked Items:", checkedItems);
     handleAirlines(checkedItems);
   }, [checkedItems]);
- 
+
   const handleChangeRefundable = (e) => {
     setRefundable(!refundable);
-    if(refundable===true){
-    handleRefund(refundable)}
-    else{
-      handleRefund(false)
-    }
-    console.log(refundable,"check refund")
+    handleRefund(!refundable);
   };
-
-  let x = localStorage.getItem("myKey");
-  let y = JSON.parse(x);
 
   const formatTime = (timeString) => {
     const date = new Date(timeString);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   };
 
- 
   return (
     <Style>
       <div className="filters">
         <div className="firstFilter">
-          <h3>Sort by price</h3>
+          <h3>Sort by Price</h3>
           <div className="div">
-            <input onChange={handleSort} type="radio" name="sort"/>
-            <p>Low to High</p>
+            <input
+              onChange={handleSort}
+              type="radio"
+              name="sort"
+              id="low-to-high"
+            />
+            <label htmlFor="low-to-high">Low to High</label>
           </div>
           <div className="div">
-            <input onChange={handleHigh} type="radio" name="sort"/>
-            <p>High to Low</p>
+            <input
+              onChange={handleHigh}
+              type="radio"
+              name="sort"
+              id="high-to-low"
+            />
+            <label htmlFor="high-to-low">High to Low</label>
           </div>
         </div>
         <div className="firstFilter">
           <h3>Popular Filters</h3>
-          {/* <div className="div">
-            <input type="checkbox" />
-            <p>stop</p>
-          </div>
           <div className="div">
-            <input type="checkbox" />
-            <p>Late Departures</p>
-          </div> */}
-          <div className="div">
-            <input type="checkbox"  onChange={handleChangeRefundable} />
-            <p>Refundable Fares</p>
+            <input
+              type="checkbox"
+              onChange={handleChangeRefundable}
+              id="refundable"
+            />
+            <label htmlFor="refundable">Refundable Fares</label>
           </div>
         </div>
         <div className="firstFilter">
-  <h3>Alliances & Airlines</h3>
-  <div className="div">
-    <input type="checkbox" value="Japan Airlines" onChange={handleChangeCheckBox} />
-    <p>Japan Airlines</p>
-  </div>
-  <div className="div">
-    <input type="checkbox" value="IndiGo" onChange={handleChangeCheckBox} />
-    <p>IndiGo</p>
-  </div>
-  <div className="div">
-    <input type="checkbox" value="American Airlines" onChange={handleChangeCheckBox} />
-    <p>American Airlines</p>
-  </div>
-</div>
-
-        {/* <div className="firstFilter">
-          <h3>Layover Airports</h3>
+          <h3>Alliances & Airlines</h3>
           <div className="div">
-            <input type="checkbox" />
-            <p>Frankfurt</p>
+            <input
+              type="checkbox"
+              value="Japan Airlines"
+              onChange={handleChangeCheckBox}
+              id="japan-airlines"
+            />
+            <label htmlFor="japan-airlines">Japan Airlines</label>
           </div>
-        </div> */}
+          <div className="div">
+            <input
+              type="checkbox"
+              value="IndiGo"
+              onChange={handleChangeCheckBox}
+              id="indigo"
+            />
+            <label htmlFor="indigo">IndiGo</label>
+          </div>
+          <div className="div">
+            <input
+              type="checkbox"
+              value="American Airlines"
+              onChange={handleChangeCheckBox}
+              id="american-airlines"
+            />
+            <label htmlFor="american-airlines">American Airlines</label>
+          </div>
+        </div>
         <div className="firstFilter">
-          <h3>Select Range ₹{value}</h3>
+          <h3>Select Price Range ₹{value}</h3>
           <input type="range" min="1000" max="10000" onChange={handleSlider} />
         </div>
       </div>
       <div className="allData">
-      {data.length !== 0 ? (
-  data.map((e, index) => (
-    <h1 key={index}>
-      Flight from {e.departure} to {e.arrival}
-    </h1>
-  ))
-) : (
-  <h1>Please select proper date or no flight must be available on this day</h1>
-)}
-
+        {data.length !== 0 ? (
+          data.map((e, index) => (
+            <h1 key={index}>
+              Flight from {e.departure} to {e.arrival}
+            </h1>
+          ))
+        ) : (
+          <h1>
+            Please select proper date or no flight must be available on this day
+          </h1>
+        )}
 
         {data.map((e) => (
-      
           <div key={nanoid(6)} className="maping">
             <div className="div1">
               <div className="one">
@@ -321,72 +303,23 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
                       : "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
                   }
-                  alt=""
+                  alt={e.airline}
                 />
                 <p>{e.airline}</p>
               </div>
               <div className="three">
-                <h6>Departure Time</h6>
+                <p>Departure Time</p>
                 <h5>{formatTime(e.departureTime)}</h5>
-              
-                {/* <p>{e.departure.iata}</p> */}
               </div>
-               <div className="three">
-               <h6>Arrival Time</h6>
+              <div className="three">
+                <p>Arrival Time</p>
                 <h5>{formatTime(e.arrivalTime)}</h5>
-              
-                {/* <p>{e.departure.iata}</p> */}
               </div>
-              {/*  <p>
-                  {+e.arrival.scheduled
-                    .split("T")[1]
-                    .split("+")[0]
-                    .split(":")[0] -
-                    Number(
-                      e.departure.scheduled
-                        .split("T")[1]
-                        .split("+")[0]
-                        .split(":")[0]
-                    ) +
-                    " hours " +
-                    (+e.arrival.scheduled
-                      .split("T")[1]
-                      .split("+")[0]
-                      .split(":")[1] -
-                      Number(
-                        e.departure.scheduled
-                          .split("T")[1]
-                          .split("+")[0]
-                          .split(":")[1]
-                      ) +
-                      " minutes")}
-                </p>
-                <div></div>
-                <span>Safe Journey</span>
-              </div>
-              <div className="two">
-                <h5>{e.arrival.scheduled.split("T")[1].split("+")[0]}</h5>
-                <p>{e.arrival.iata}</p>
-              </div>*/}
-              <h7>Economy {"₹"+ e.oneWayPriceEconomy}
-                {/* {+e.departure.delay === 0 || null
-                  ? "₹1200"
-                  : "₹" + e.departure.delay * 200} */}
-                 
-              </h7> 
-              <h7> Premium {"₹"+e.oneWayPricePremium}</h7>
-              {/* <button
-                onClick={() => {
-                  bookData(e);
-                }}
-              >
-                <Link to="/checkout">BOOK NOW</Link>
-              </button> */}
-                {/* <Link to={`/flight-booking/${e._id}`}> */}
-                {/* /FlightBooking/:Id */}
-                <Link to={`/FlightBooking/${e._id}`}>
-              <button onClick={() => bookData(e)}>Book</button>
-            </Link>
+              <h7>Economy ₹{e.oneWayPriceEconomy}</h7>
+              <h7>Premium ₹{e.oneWayPricePremium}</h7>
+              <Link to={`/FlightBooking/${e._id}`}>
+                <button onClick={() => bookData(e)}>Book</button>
+              </Link>
             </div>
             <div className="div2">
               Travel to India is open for all Indian passport holders, OCI & PIO
