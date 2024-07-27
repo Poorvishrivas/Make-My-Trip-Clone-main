@@ -7,15 +7,15 @@ const Style = styled.div`
   display: grid;
   grid-template-columns: 30% 70%;
   gap: 30px;
-  background-color: #f0f0f0; /* Lighter background color */
-  padding: 20px; /* Added padding for spacing */
+  background-color: #f0f0f0;
+  padding: 20px;
 
   .filters {
     background-color: #ffffff;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    height: fit-content; /* Adjust height based on content */
+    height: fit-content;
     position: relative;
   }
 
@@ -29,8 +29,8 @@ const Style = styled.div`
 
     .maping {
       background-color: #ffffff;
-      border-radius: 8px; /* Rounded corners */
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       padding: 20px;
       margin-bottom: 20px;
 
@@ -86,7 +86,7 @@ const Style = styled.div`
             width: 60px;
             height: 4px;
             border-radius: 6px;
-            background-color: #e74c3c; /* Changed to a softer color */
+            background-color: #e74c3c;
             margin: 5px 0;
           }
         }
@@ -109,11 +109,11 @@ const Style = styled.div`
       }
 
       .div2 {
-        background-color: #fff2e6; /* Softer background color */
+        background-color: #fff2e6;
         text-align: center;
         font-size: 12px;
         padding: 10px;
-        border-radius: 8px; /* Rounded corners */
+        border-radius: 8px;
       }
 
       .div3 {
@@ -159,6 +159,8 @@ export const Bottom = ({
   handleRefund,
   handleAirlines,
 }) => {
+  console.log("Data received:", data); // Log the data to the console
+
   const [value, setValue] = useState("");
   const [refundable, setRefundable] = useState(true);
   const [checkedItems, setCheckedItems] = useState([]);
