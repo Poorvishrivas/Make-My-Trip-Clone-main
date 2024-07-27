@@ -38,7 +38,6 @@ const Style = styled.div`
         }
         select {
           border: 0px;
-          //-webkit-appearance: none;
           -moz-appearance: none;
           text-indent: 1px;
           color: white;
@@ -56,7 +55,6 @@ const Style = styled.div`
       }
       .second {
         width: 170px;
-        //line-height: 0;
         background: rgba(104, 105, 104, 0.3);
         border-radius: 5px;
         p {
@@ -67,7 +65,6 @@ const Style = styled.div`
         }
         select {
           border: 0px;
-          //-webkit-appearance: none;
           -moz-appearance: none;
           text-indent: 8px;
           color: white;
@@ -161,15 +158,20 @@ export const SearchBox = ({ handle }) => {
   };
 
   useEffect(() => {
-    let promise = async () => {
-      const data = await fetch(`${apiBaseUrl}getallcountry/countries/cities`);
-      console.log(data, "Countrys data");
-
-      const ans = await data.json();
-      setText(ans);
-      console.log(ans, "ans data");
+    const fetchCities = async () => {
+      try {
+        const response = await fetch(
+          `${apiBaseUrl}getallcountry/countries/cities`
+        );
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setText(data);
+      } catch (error) {
+        console.error("Failed to fetch cities:", error);
+      }
     };
-    promise();
+
+    fetchCities();
   }, [apiBaseUrl]);
 
   const handleButton = () => {
@@ -207,7 +209,6 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>From</p>
-
             <select
               onChange={handleSelect}
               name="from"
@@ -224,7 +225,6 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>To</p>
-
             <select onChange={handleSelect} name="to" id="to" value={select.to}>
               <option value="">Select</option>
               {text.map((e) => (
@@ -272,7 +272,6 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>Traveller and Class</p>
-
             <select
               onChange={handleSelect}
               name="TravellerClass"
