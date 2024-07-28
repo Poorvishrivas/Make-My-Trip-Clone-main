@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -163,19 +163,24 @@ const SubmitButton = styled.input`
   `}
 `;
 
-const LoginForm = () => {
+const LoginForm = ({
+  handleOtpStatus,
+  handleChange,
+  hashHandleChange,
+  value,
+  handleLoginSubmit,
+}) => {
   const [accType, setAccType] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleAccTypeChange = (type) => {
     setAccType(type);
     setIsAdmin(type === "admin");
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -185,11 +190,7 @@ const LoginForm = () => {
       const res = await axios.post("https://your-api-endpoint", formData);
       if (res.status === 200) {
         // Save token and user data to context/state if needed
-        if (isAdmin) {
-          navigate("/booking");
-        } else {
-          navigate("/");
-        }
+        handleLoginSubmit(e); // Call handleLoginSubmit on successful login
       }
     } catch (err) {
       setError("Login failed. Please try again.");
@@ -224,7 +225,7 @@ const LoginForm = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 required
               />
             </FormGroup>
@@ -234,7 +235,7 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 required
               />
             </FormGroup>
