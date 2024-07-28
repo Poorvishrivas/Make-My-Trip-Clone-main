@@ -22,7 +22,7 @@ import MyTrips from "./component/MyTrips/MyTrips";
 import FlightBookingDetails from "./component/MyTrips/FlightBookingDetails";
 import HotelBookingDetails from "./component/MyTrips/HotelBookingDetails";
 import Admin from "./component/Admin/Admin";
-import { LoginPanel } from "./component/login/LoginPanel"; // Import LoginPanel
+import { LoginPanel } from "./component/login/loginpanel/LoginPanel"; // Import LoginPanel
 
 function App() {
   let apiBaseUrl = "https://make-my-trip-clone-main-backend.vercel.app/api/";
