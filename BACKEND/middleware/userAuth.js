@@ -1,16 +1,13 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
+
 function userAuth(req, res, next) {
-  console.log(req.header, "check");
-  const token = req.header("Authorization");
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) return res.status(401).send("Access denied. No token provided.");
 
   try {
-    console.log(config.jwtSecret, "-->check jwt");
-    const removeBerer = token.split(" ");
-
-    const decoded = jwt.verify(removeBerer[1], config.jwtSecret);
+    const decoded = jwt.verify(token, config.jwtSecret);
 
     if (decoded.user.role === "user" || decoded.user.role === "admin") {
       req.user = decoded;

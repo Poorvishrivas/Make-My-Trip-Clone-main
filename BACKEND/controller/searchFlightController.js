@@ -1,52 +1,3 @@
-const Flight = require("../model/Flight");
-
-exports.searchFlights = async (req, res) => {
-  const { from, to, departureDate, returnDate, flightClass } = req.query;
-
-  let query = {
-    departure: from,
-    arrival: to,
-  };
-
-  if (flightClass) {
-    query.class = flightClass;
-  }
-
-  console.log("Outbound flight query:------------", query);
-
-  let flights = [];
-
-  try {
-    const outboundFlights = await Flight.find(query);
-    console.log(outboundFlights);
-    flights = flights.concat(outboundFlights);
-    if (returnDate) {
-      const returnQuery = {
-        departure: to,
-        arrival: from,
-      };
-
-      if (departureDate) {
-        returnQuery.departureTime = { $gte: new Date(returnDate) };
-      }
-
-      if (flightClass) {
-        returnQuery.class = flightClass;
-      }
-
-      console.log("Return flight query:", returnQuery);
-
-      const returnFlights = await Flight.find(returnQuery);
-      flights = flights.concat(returnFlights);
-      console.log(returnFlights);
-    }
-
-    res.json(flights);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching flights", error });
-  }
-};
-
 exports.searchFlightsByPrice = async (req, res) => {
   const {
     from,
@@ -58,7 +9,6 @@ exports.searchFlightsByPrice = async (req, res) => {
     refundableFares,
     airlines,
   } = req.body;
-  console.log(req.body, "here");
 
   let query = {
     departure: from,
@@ -77,8 +27,6 @@ exports.searchFlightsByPrice = async (req, res) => {
 
   try {
     const outboundFlights = await Flight.find(query);
-    console.log("hello");
-    console.log(outboundFlights);
     flights = flights.concat(outboundFlights);
 
     if (returnDate) {
@@ -87,7 +35,7 @@ exports.searchFlightsByPrice = async (req, res) => {
         arrival: from,
       };
 
-      if (departureDate) {
+      if (returnDate) {
         returnQuery.departureTime = { $gte: new Date(returnDate) };
       }
 
@@ -99,11 +47,10 @@ exports.searchFlightsByPrice = async (req, res) => {
       flights = flights.concat(returnFlights);
     }
 
-    if (sortByPrice === "lowToHigh") {
-      flights.sort((a, b) => a.price - b.price);
-    }
-    if (sortByPrice === "highToLow") {
-      flights.sort((a, b) => b.price - a.price);
+    if (sortByPrice) {
+      flights.sort((a, b) =>
+        sortByPrice === "lowToHigh" ? a.price - b.price : b.price - a.price
+      );
     }
     if (refundableFares) {
       flights = flights.filter((flight) => flight.refundableFares === true);
