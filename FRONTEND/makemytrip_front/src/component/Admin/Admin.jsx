@@ -137,7 +137,7 @@ const Admin = () => {
                     onClick={handleAddFlightClick}
                     className="mb-3"
                   >
-                    Add Flight Ticket
+                    Add New Flight
                   </Button>
                   {flight.map((booking) => (
                     <div
@@ -196,7 +196,7 @@ const Admin = () => {
                     onClick={handleAddHotelClick}
                     className="mb-3"
                   >
-                    Add New Hotels
+                    Add New Hotel
                   </Button>
                   {hotel.map((item) => (
                     <div
