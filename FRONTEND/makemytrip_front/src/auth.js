@@ -1,38 +1,23 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import { getToken } from './component/login/loginpanel/LoginForm';
-const cookies = new Cookies();
+import axios from "axios";
+import { getToken } from "./component/login/loginpanel/LoginForm";
 
 axios.defaults.withCredentials = true;
-class Auth {
-	constructor() {
-		this.authenticated = false;
-	}
 
-	isAuthenticated() {
-		const accessToken = getToken();
-		const refreshToken = getToken();
-		if (!accessToken && !refreshToken) {
-			return (this.authenticated = false);
-		}
-		if (accessToken && refreshToken) {
-			return (this.authenticated = true);
-		}
-		// if (!accessToken && refreshToken) {
-		// 	axios
-		// 		.post('http://localhost:4000/refresh', {
-		// 			withCredentials: true
-		// 		})
-		// 		.then(function(res) {
-		// 			console.log(res.data);
-					
-		// 			window.location.reload();
-		// 		})
-		// 		.catch(function(error) {
-		// 			console.log(error.response);
-		// 		});
-		// }
-	}
+class Auth {
+  constructor() {
+    this.authenticated = false;
+  }
+
+  isAuthenticated() {
+    const accessToken = getToken();
+    const refreshToken = getToken(); // Assuming both access and refresh tokens are stored the same way
+    if (!accessToken && !refreshToken) {
+      this.authenticated = false;
+    } else if (accessToken && refreshToken) {
+      this.authenticated = true;
+    }
+    return this.authenticated;
+  }
 }
 
 export default new Auth();

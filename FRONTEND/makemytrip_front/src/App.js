@@ -1,4 +1,4 @@
-import "./App.css";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Statecontext from "./component/Context/Statecontext";
@@ -9,7 +9,6 @@ import { UnderConstruction } from "./component/SearchPage/Underconstruction";
 import { HotelSearch } from "./component/SearchPage/HotelSearch";
 import AddFlightForm from "./component/Admin/AddFlightForm";
 import HotelsList from "./component/Admin/HotelsList";
-import { useState } from "react";
 import AddHotelForm from "./component/Admin/AddHotelForm";
 import BookingPage from "./component/HotelBooking/BookingPage";
 import UpdateFlightForm from "./component/Admin/UpdateFlightForm";
@@ -23,6 +22,7 @@ import FlightBookingDetails from "./component/MyTrips/FlightBookingDetails";
 import HotelBookingDetails from "./component/MyTrips/HotelBookingDetails";
 import Admin from "./component/Admin/Admin";
 import { LoginPanel } from "./component/login/loginpanel/LoginPanel"; // Import LoginPanel
+import "./App.css";
 
 function App() {
   let apiBaseUrl = "https://make-my-trip-clone-main-backend.vercel.app/api/";
