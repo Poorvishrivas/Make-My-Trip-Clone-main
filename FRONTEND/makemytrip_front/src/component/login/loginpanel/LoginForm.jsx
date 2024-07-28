@@ -271,7 +271,6 @@ export const LoginForm = () => {
                 required
               />
             </FormGroup>
-
             <FormGroup isAdmin={isAdmin}>
               <label>Password</label>
               <input
@@ -282,8 +281,8 @@ export const LoginForm = () => {
                 required
               />
             </FormGroup>
-
             <SubmitButton type="submit" value="CONTINUE" isAdmin={isAdmin} />
+            console.log("clicked");
           </form>
           <SignupLink>
             <Button
