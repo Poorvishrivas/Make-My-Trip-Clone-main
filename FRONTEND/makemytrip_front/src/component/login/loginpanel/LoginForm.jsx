@@ -229,13 +229,9 @@ export const LoginForm = () => {
   const getAdminRole = () => {
     const userRole = localStorage.getItem("role");
     if (userRole === "admin") {
-      if (!pathname.includes("Booking")) {
-        navigate("/Admin/FlightList");
-      } else {
-        navigate(pathname);
-      }
+      navigate("/Admin/FlightList");
     } else {
-      navigate(pathname);
+      navigate("/");
     }
   };
 
