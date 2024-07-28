@@ -74,7 +74,7 @@ export default function UserForm() {
   }, [isAdmin]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked");
+
     axios
       .post(
         "https://make-my-trip-clone-main-backend.vercel.app/api/auth/Register",
