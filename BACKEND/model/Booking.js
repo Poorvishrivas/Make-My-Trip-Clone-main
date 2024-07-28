@@ -7,7 +7,7 @@ const BookingSchema = new mongoose.Schema({
     ref: "Flight",
     required: true,
   },
-
+  // passengerName: { type: String, required: true },
   passengerEmail: { type: String, required: true },
   passengerDetails: [
     {
