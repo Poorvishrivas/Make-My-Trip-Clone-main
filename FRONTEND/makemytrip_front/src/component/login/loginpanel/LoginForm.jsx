@@ -198,7 +198,6 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState({ email: "", password: "" });
   const [isAdmin, setIsAdmin] = useState(false);
-  const pathname = window.location.pathname;
 
   const handleChange = (name) => (event) => {
     setValue({ ...value, [name]: event.target.value });
@@ -229,7 +228,7 @@ export const LoginForm = () => {
   const getAdminRole = () => {
     const userRole = localStorage.getItem("role");
     if (userRole === "admin") {
-      navigate("/Admin/FlightList");
+      navigate("/booking");
     } else {
       navigate("/");
     }
