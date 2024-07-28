@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const Style = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  flex-direction: row-reverse; /* Swap the order of children to place filters on the right */
+  gap: 20px;
   background: linear-gradient(
     to bottom,
     #f0f4f8,
@@ -23,10 +23,8 @@ const Style = styled.div`
   }
 
   .allData {
-    margin: 0;
-    max-width: calc(100% - 320px); /* Adjust based on filters width */
-    margin-left: 20px;
-
+    flex: 1; /* Take the remaining space */
+    margin-right: 20px; /* Add some space between filters and main content */
     h1 {
       color: #333;
       font-size: 24px;
@@ -43,6 +41,7 @@ const Style = styled.div`
       .div1 {
         display: flex;
         justify-content: space-between;
+        align-items: center; /* Center align items vertically */
         margin-bottom: 20px;
 
         .one {
@@ -82,21 +81,25 @@ const Style = styled.div`
             margin: 5px 0;
           }
         }
-      }
 
-      button {
-        width: 140px;
-        height: 40px;
-        border-radius: 25px;
-        background: linear-gradient(to right, #8e44ad 0%, #9b59b6 100%);
-        border: none;
-        color: white;
-        font-weight: 600;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        &:hover {
-          background: linear-gradient(to right, #9b59b6 0%, #8e44ad 100%);
+        button {
+          width: 140px;
+          height: 40px;
+          border-radius: 25px;
+          background: linear-gradient(to right, #8e44ad 0%, #9b59b6 100%);
+          border: none;
+          color: white;
+          font-weight: 600;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+          &:hover {
+            background: linear-gradient(to right, #9b59b6 0%, #8e44ad 100%);
+          }
+        }
+
+        h7 {
+          margin: 0 10px; /* Adjust as needed */
         }
       }
 
