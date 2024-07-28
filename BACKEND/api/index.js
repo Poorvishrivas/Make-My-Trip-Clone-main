@@ -18,7 +18,9 @@ app.use(express.json({ extended: false }));
 // Update CORS settings to allow requests from specific origins
 app.use(
   cors({
-    origin: ["https://make-my-trip-clone-main-frontend.vercel.app"],
+    origin: [
+      "https://make-my-trip-clone-main-frontend.vercel.app", // Add additional origins as needed
+    ],
     credentials: true,
   })
 );
