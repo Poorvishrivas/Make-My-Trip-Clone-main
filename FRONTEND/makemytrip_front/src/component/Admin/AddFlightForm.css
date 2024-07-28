@@ -1,9 +1,34 @@
-.input-border {
-    border: 1px solid black !important;
-    background-color: white !important;
-  }
+.add-flight-form {
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px; /* Adjust based on the height of your NavBar */
+}
 
-  .row{
-    display: inline;
-  }
-  
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-checkbox {
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.text-center {
+  text-align: center;
+}
