@@ -93,6 +93,10 @@ const Admin = () => {
     navigate("/add-flight");
   };
 
+  const handleAddHotelClick = () => {
+    navigate("/add-hotel");
+  };
+
   return (
     <Container className="container-background mt-5">
       {errorMessage && (
@@ -187,6 +191,13 @@ const Admin = () => {
               <Tab.Pane eventKey="HotelBookings">
                 <div className="empty-state">
                   <h5>Hotels Booking Management</h5>
+                  <Button
+                    variant="primary"
+                    onClick={handleAddHotelClick}
+                    className="mb-3"
+                  >
+                    Add New Hotels
+                  </Button>
                   {hotel.map((item) => (
                     <div
                       style={{
