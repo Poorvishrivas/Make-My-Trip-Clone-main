@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Style = styled.div`
   display: flex;
-  flex-direction: row-reverse; /* Swap the order of children to place filters on the right */
+  flex-direction: row-reverse;
   gap: 20px;
   background: linear-gradient(
     to bottom,
