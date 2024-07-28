@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Statecontext from "./component/Context/Statecontext";
@@ -8,17 +7,14 @@ import { Search } from "./component/SearchPage/Search";
 import FlightsList from "./component/Admin/FlightsList";
 import { UnderConstruction } from "./component/SearchPage/Underconstruction";
 import { HotelSearch } from "./component/SearchPage/HotelSearch";
-
 import AddFlightForm from "./component/Admin/AddFlightForm";
 import HotelsList from "./component/Admin/HotelsList";
 import { useState } from "react";
 import AddHotelForm from "./component/Admin/AddHotelForm";
 import BookingPage from "./component/HotelBooking/BookingPage";
-
 import UpdateFlightForm from "./component/Admin/UpdateFlightForm";
 import UpdateHotelForm from "./component/Admin/UpdateHotelForm";
 import FlightBookingPage from "./component/FlightBooking/FlightBookingPage";
-
 import UserForm from "./component/login/UserForm";
 import Booking from "./component/FlightBooking/Booking";
 import Bookings from "./component/HotelBooking/Booking";
@@ -26,6 +22,7 @@ import MyTrips from "./component/MyTrips/MyTrips";
 import FlightBookingDetails from "./component/MyTrips/FlightBookingDetails";
 import HotelBookingDetails from "./component/MyTrips/HotelBookingDetails";
 import Admin from "./component/Admin/Admin";
+import { LoginPanel } from "./component/login/LoginPanel"; // Import LoginPanel
 
 function App() {
   let apiBaseUrl = "https://make-my-trip-clone-main-backend.vercel.app/api/";
@@ -35,6 +32,7 @@ function App() {
   const [returnDate, setReturnDate] = useState("");
   const [travellerClass, setTravellerClass] = useState("");
   const [location, setLocation] = useState("");
+
   return (
     <div className="App">
       <Statecontext.Provider
@@ -54,8 +52,6 @@ function App() {
           setTravellerClass,
         }}
       >
-        {/* <RouterProvider router={router}/> */}
-
         <BrowserRouter>
           <div>
             <Routes>
@@ -80,13 +76,12 @@ function App() {
               <Route path="/SignUp" element={<UserForm />} />
               <Route path="/FlightBooking/:Id" element={<Booking />} />
               <Route path="/HotelBooking/:Id" element={<Bookings />} />
-              {/* <Route path="/booking" element={<BookingPage />} /> */}
               <Route path="/MyTrips" element={<MyTrips />} />
               <Route path="/booking" element={<Admin />} />
               <Route
                 path="/FlightBookingDetails"
                 element={<FlightBookingDetails />}
-              />{" "}
+              />
               <Route
                 path="/HotelBookingDetails"
                 element={<HotelBookingDetails />}
@@ -102,6 +97,8 @@ function App() {
               />
               <Route path="/BookingPage" element={<BookingPage />} />
               <Route path="/SignUp" element={<UserForm />} />
+              <Route path="/login" element={<LoginPanel />} />{" "}
+              {/* Add LoginPanel route */}
             </Routes>
           </div>
         </BrowserRouter>

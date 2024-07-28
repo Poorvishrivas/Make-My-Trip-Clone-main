@@ -163,101 +163,58 @@ const SubmitButton = styled.input`
   `}
 `;
 
-const SignupLink = styled.div`
-  margin-top: 20px;
-
-  button {
-    background: transparent;
-    border: 1px solid #007bff;
-    color: #007bff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
-
-    &:hover {
-      background: #007bff;
-      color: #fff;
-    }
-  }
-`;
-
-const Terms = styled.p`
-  font-size: 14px;
-  color: #666;
-  margin-top: 20px;
-
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-`;
-
-export const LoginForm = () => {
-  const navigate = useNavigate();
-  const [value, setValue] = useState({ email: "", password: "" });
+const LoginForm = () => {
+  const [accType, setAccType] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleChange = (name) => (event) => {
-    setValue({ ...value, [name]: event.target.value });
+  const handleAccTypeChange = (type) => {
+    setAccType(type);
+    setIsAdmin(type === "admin");
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios
-      .post(
-        "https://make-my-trip-clone-main-backend.vercel.app/api/auth/Login",
-        {
-          email: value.email,
-          password: value.password,
+    try {
+      const res = await axios.post("https://your-api-endpoint", formData);
+      if (res.status === 200) {
+        // Save token and user data to context/state if needed
+        if (isAdmin) {
+          navigate("/booking");
+        } else {
+          navigate("/");
         }
-      )
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("role", res.data.role);
-        getAdminRole();
-      })
-      .catch((err) => {
-        console.error(err.response.data.msg);
-        alert("Login failed. Please check your credentials.");
-      });
-  };
-
-  const getAdminRole = () => {
-    const userRole = localStorage.getItem("role");
-    if (userRole === "admin") {
-      navigate("/booking");
-    } else {
-      navigate("/");
+      }
+    } catch (err) {
+      setError("Login failed. Please try again.");
     }
-  };
-
-  const handleSignupClick = (isAdmin) => {
-    const urlParams = new URLSearchParams({ isAdmin: isAdmin.toString() });
-    navigate(`/signup?${urlParams.toString()}`);
   };
 
   return (
     <Container>
       <FormWrapper>
         <LoginBox isAdmin={isAdmin}>
-          <Title isAdmin={isAdmin}>Login / Signup</Title>
+          <Title isAdmin={isAdmin}>Login</Title>
           <AccountTypeSelector isAdmin={isAdmin}>
             <div
-              className={!isAdmin ? "active-login" : ""}
-              onClick={() => setIsAdmin(false)}
-              selected={!isAdmin}
+              className={`acc-type ${
+                accType === "admin" ? "active-login" : ""
+              }`}
+              onClick={() => handleAccTypeChange("admin")}
             >
-              Personal Account
+              Admin
             </div>
             <div
-              className={isAdmin ? "active-login" : ""}
-              onClick={() => setIsAdmin(true)}
-              selected={isAdmin}
+              className={`acc-type ${accType === "user" ? "active-login" : ""}`}
+              onClick={() => handleAccTypeChange("user")}
             >
-              Admin Account
+              User
             </div>
           </AccountTypeSelector>
           <form onSubmit={handleSubmit}>
@@ -265,9 +222,9 @@ export const LoginForm = () => {
               <label>Email</label>
               <input
                 type="email"
-                onChange={handleChange("email")}
-                placeholder="user@example.com"
-                value={value.email}
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -275,34 +232,21 @@ export const LoginForm = () => {
               <label>Password</label>
               <input
                 type="password"
-                onChange={handleChange("password")}
-                placeholder="********"
-                value={value.password}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
             </FormGroup>
+            {error && (
+              <div style={{ color: "red", marginBottom: "15px" }}>{error}</div>
+            )}
             <SubmitButton type="submit" value="CONTINUE" isAdmin={isAdmin} />
-            console.log("clicked");
           </form>
-          <SignupLink>
-            <Button
-              variant="outline-primary"
-              onClick={() => handleSignupClick(isAdmin)}
-            >
-              Or Signup
-            </Button>
-          </SignupLink>
-          <Terms>
-            By proceeding, you agree to MakeMyTrip's{" "}
-            <a href="#">Privacy Policy</a>, <a href="#">User Agreement</a> and{" "}
-            <a href="#">T&Cs</a>
-          </Terms>
         </LoginBox>
       </FormWrapper>
     </Container>
   );
 };
 
-export const getToken = () => {
-  return localStorage.getItem("token");
-};
+export default LoginForm;
