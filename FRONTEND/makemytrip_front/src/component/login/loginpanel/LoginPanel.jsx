@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React from "react";
+import { useState } from "react";
 import { LoginForm } from "./LoginForm";
 import { ConfirmOtp } from "./ConfirmOtp";
 import Auth from "../../../auth";
-
+import styled from "styled-components";
 const Style = styled.div`
   .loginMain {
     position: fixed;
@@ -49,16 +48,28 @@ const Style = styled.div`
     cursor: pointer;
   }
 `;
-
 export const LoginPanel = ({ handleClick, handleUser }) => {
   const [otpSend, setOtpSend] = useState(false);
   const [findUser, setFindUser] = useState({});
-  const [isUserExist, setIsUserExist] = useState(false);
-  const navigate = useNavigate();
+  const [isUserExist, setIsUserExist] = useState(); //initial existence of user
 
   const checkIsUserExist = (mob) => {
-    // Dummy implementation for checking user existence
+    //console.log(mob)
+    //fetch user from database using mobile number
+    // let user = {
+    //   name:"Rahul yadav",
+    //   password:"rahul@123"
+    // }
+    // setFindUser(user)
+    // handleClick()
+    // setIsUserExist(true)
+
+    //if found user then  call handleuser(gotuser)
+
+    //set user false
+
     setIsUserExist(false);
+    //
   };
 
   const [state, setState] = useState({
@@ -74,25 +85,17 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
     setOtpSend(true);
   };
 
+  // handling with user login inputs
   const handleChange = (input) => (e) => {
     setState({ ...state, [input]: e.target.value });
   };
 
+  //handling has status
   const hashHandleChange = (hash) => {
     setState({ ...state, hash: hash });
   };
-
   const handleNewUser = (newuser) => {
     handleUser(newuser);
-  };
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    if (isUserExist) {
-      navigate("/");
-    } else {
-      navigate("/booking");
-    }
   };
 
   return (
@@ -104,16 +107,15 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
           ) : otpSend ? (
             <ConfirmOtp
               handleNewUser={checkIsUserExist}
-              handleChange={handleChange}
+              handleChange={handleChange} // handling with user login inputs
               value={value}
             />
           ) : (
             <LoginForm
               handleOtpStatus={handleOtpSend}
-              handleChange={handleChange}
-              hashHandleChange={hashHandleChange}
+              handleChange={handleChange} // handling with user login inputs
+              hashHandleChange={hashHandleChange} //handling has status
               value={value}
-              handleLoginSubmit={handleLoginSubmit} // Add this prop
             />
           )}
         </div>
