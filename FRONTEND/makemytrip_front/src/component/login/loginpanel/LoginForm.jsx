@@ -163,59 +163,70 @@ const SubmitButton = styled.input`
   `}
 `;
 
-const LoginForm = ({
-  handleOtpStatus,
-  handleChange,
-  hashHandleChange,
-  value,
-  handleLoginSubmit,
-}) => {
-  const [accType, setAccType] = useState("");
+export const LoginForm = () => {
+  const navigate = useNavigate();
+  const [value, setValue] = useState({ email: "", password: "" });
   const [isAdmin, setIsAdmin] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState(null);
+  const pathname = window.location.pathname;
 
-  const handleAccTypeChange = (type) => {
-    setAccType(type);
-    setIsAdmin(type === "admin");
+  const handleChange = (name) => (event) => {
+    setValue({ ...value, [name]: event.target.value });
   };
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("https://your-api-endpoint", formData);
-      if (res.status === 200) {
-        // Save token and user data to context/state if needed
-        handleLoginSubmit(e); // Call handleLoginSubmit on successful login
+
+    axios
+      .post("https://make-my-trip-clone-backend.vercel.app/api/auth/Login", {
+        email: value.email,
+        password: value.password,
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        getAdminRole();
+        const popup = document.getElementById("popup");
+        popup.classList.remove("active");
+      })
+      .catch((err) => {
+        alert(err.response.data.msg);
+      });
+  };
+
+  const getAdminRole = () => {
+    const userRole = localStorage.getItem("role");
+    if (userRole === "admin") {
+      if (!pathname.includes("Booking")) {
+        navigate("/Admin/FlightList");
+      } else {
+        navigate(pathname);
       }
-    } catch (err) {
-      setError("Login failed. Please try again.");
+    } else {
+      navigate(pathname);
     }
+  };
+
+  const handleSignupClick = (isAdmin) => {
+    const urlParams = new URLSearchParams({ isAdmin: isAdmin.toString() });
+    navigate(`/signup?${urlParams.toString()}`);
   };
 
   return (
     <Container>
       <FormWrapper>
         <LoginBox isAdmin={isAdmin}>
-          <Title isAdmin={isAdmin}>Login</Title>
+          <Title isAdmin={isAdmin}>Login/Signup</Title>
           <AccountTypeSelector isAdmin={isAdmin}>
             <div
-              className={`acc-type ${
-                accType === "admin" ? "active-login" : ""
-              }`}
-              onClick={() => handleAccTypeChange("admin")}
+              className={!isAdmin ? "active-login" : ""}
+              onClick={() => setIsAdmin(false)}
             >
-              Admin
+              Personal Account
             </div>
             <div
-              className={`acc-type ${accType === "user" ? "active-login" : ""}`}
-              onClick={() => handleAccTypeChange("user")}
+              className={isAdmin ? "active-login" : ""}
+              onClick={() => setIsAdmin(true)}
             >
-              User
+              Admin Account
             </div>
           </AccountTypeSelector>
           <form onSubmit={handleSubmit}>
@@ -223,9 +234,9 @@ const LoginForm = ({
               <label>Email</label>
               <input
                 type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
+                onChange={handleChange("email")}
+                placeholder="user@gmail.com"
+                value={value.email}
                 required
               />
             </FormGroup>
@@ -233,21 +244,39 @@ const LoginForm = ({
               <label>Password</label>
               <input
                 type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
+                onChange={handleChange("password")}
+                placeholder="*"
+                maxLength={10}
+                value={value.password}
                 required
               />
             </FormGroup>
-            {error && (
-              <div style={{ color: "red", marginBottom: "15px" }}>{error}</div>
-            )}
-            <SubmitButton type="submit" value="CONTINUE" isAdmin={isAdmin} />
+            <SubmitButton
+              type="submit"
+              className="cbtn"
+              value="CONTINUE"
+              isAdmin={isAdmin}
+            />
           </form>
+          <div className="d-flex justify-content-center">
+            <Button
+              variant="outline-primary"
+              onClick={() => handleSignupClick(isAdmin)}
+            >
+              Or Signup
+            </Button>
+          </div>
+          <p className="tc">
+            By proceeding, you agree to MakeMyTrip's{" "}
+            <a href="#">Privacy Policy</a>, <a href="#">User Agreement</a> and{" "}
+            <a href="#">T&Cs</a>
+          </p>
         </LoginBox>
       </FormWrapper>
     </Container>
   );
 };
 
-export default LoginForm;
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
